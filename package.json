@@ -5,10 +5,11 @@
   "author": "Philip Ding <philipding_1989@163.com>",
   "private": true,
   "scripts": {
-    "start": "node index.js",
-    "build": "npm run build:client && npm run build:server",
+    "dev:server": "egg-bin --port 7001 dev",
+    "dev:client": "node build/dev-server.js",
+    "start": "npm run build:client && npm run build:server",
     "build:client": "node build/build.js",
-    "build:server": "echo 'TODO: SSR LATER'"
+    "build:server": "node index.js"
   },
   "dependencies": {
     "egg": "^1.3.0",
@@ -31,13 +32,14 @@
     "connect-history-api-fallback": "^1.3.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
+    "egg-bin": "^3.4.0",
     "eslint": "^3.19.0",
     "eslint-friendly-formatter": "^2.0.7",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-html": "^2.0.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.14.1",
-    "extract-text-webpack-plugin": "^2.0.0",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "friendly-errors-webpack-plugin": "^1.1.3",
     "html-webpack-plugin": "^2.28.0",

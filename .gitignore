@@ -4,6 +4,7 @@ dist/
 run/
 logs/
 .idea/
+.vscode/
 
 npm-debug.log*
 yarn-debug.log*
