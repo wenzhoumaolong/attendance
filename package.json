@@ -7,7 +7,7 @@
   "scripts": {
     "dev:server": "egg-bin --port 7001 dev",
     "dev:client": "node build/dev-server.js",
-    "start": "npm run build:client && npm run build:server",
+    "build": "npm run build:client && npm run build:server",
     "build:client": "node build/build.js",
     "build:server": "node index.js"
   },
