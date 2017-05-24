@@ -20,3 +20,6 @@ npm run build
 npm run dev:client
 npm run dev:server
 ```
+
+# 数据库创建
+在mysql中执行sql文件夹下面的init.sql脚本
