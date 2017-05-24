@@ -23,3 +23,4 @@ npm run dev:server
 
 # 数据库创建
 在mysql中执行sql文件夹下面的init.sql脚本
+创建数据库成功之后，执行mockData.sql, 插入测试数据
