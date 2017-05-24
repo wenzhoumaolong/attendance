@@ -96,6 +96,10 @@ var webpackConfig = merge(baseWebpackConfig, {
       filename: 'assets.json',
       path: path.join(__dirname, '../dist'),
       prettyPrint: true
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      'jQuery': 'jquery'
     })
   ]
 })
