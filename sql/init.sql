@@ -7,7 +7,7 @@ CREATE TABLE wharehouse (
     wharehouseName VARCHAR(50) NOT NULL,
     wharehouseAddress VARCHAR(250) NOT NULL,
     wharehouseAccount VARCHAR(50) NOT NULL,
-    wharehousePasswor VARCHAR(50) NOT NULL,
+    wharehousePassword VARCHAR(50) NOT NULL,
     wharehouseTelphone VARCHAR(20) NOT NULL,
     createDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL
@@ -36,13 +36,23 @@ CREATE TABLE employee (
 	id INT PRIMARY KEY AUTO_INCREMENT ,
 	employeeName VARCHAR(50) NOT NULL,
     employeePhone VARCHAR(20) NOT NULL,
-    employeeWechat VARCHAR(50) NOT NULL,
     roleId INT NOT NULL,
 	wharehouseId INT NOT NULL,
     RFID VARCHAR(50),
     createDate DATETIME NOT NULL,
-    updateDate DATETIME NOT NULL,
-    observers TEXT
+    updateDate DATETIME NOT NULL
+);
+
+CREATE TABLE observer_relation (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    observerId INT NOT NULL,
+    observedId INT NOT NULL
+);
+
+CREATE TABLE wechat_information (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    openId VARCHAR(50),
+    employeeId INT NOT NULL
 );
 
 /*
@@ -61,3 +71,6 @@ ALTER TABLE role_permisson_mapping ADD CONSTRAINT role_permisson_mapping_permiss
 ALTER TABLE employee ADD CONSTRAINT employee_wharehouseId FOREIGN KEY (`wharehouseId`) REFERENCES wharehouse(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE employee ADD CONSTRAINT employee_roleId FOREIGN KEY (`roleId`) REFERENCES employee_role(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE attendance_record ADD CONSTRAINT attendance_record_employeeId FOREIGN KEY (`employeeId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE wechat_information ADD CONSTRAINT wechat_information FOREIGN KEY (`employeeId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE observer_relation ADD CONSTRAINT observer_relation_observerId FOREIGN KEY (`observerId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE observer_relation ADD CONSTRAINT observer_relation_observedId FOREIGN KEY (`observedId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
