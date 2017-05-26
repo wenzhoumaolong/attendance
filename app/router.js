@@ -6,6 +6,7 @@ module.exports = app => {
   	* 	status { errorCode: '00000001', message: '帐号密码错误' }
   	**/
   	app.post('login', '/api/login', app.controller.login.login);
+  	app.get('logout', '/api/logout', app.controller.login.logout);
   	app.resources('employee', '/api/employee', app.controller.employee);
   	app.resources('warehouse', '/api/warehouse', app.controller.warehouse);
     app.get('*', app.controller.welcome.index);

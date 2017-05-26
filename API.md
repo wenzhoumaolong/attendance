@@ -1,7 +1,9 @@
+#-----------------------(^_^)--------------------------#
+
 # api login
 ## router name: login
-## path: /api/logic
-## method: Post
+## path: /api/login
+## method: POST
 ## request body:
 	{
 		phone: '',
@@ -13,4 +15,22 @@
 	}
 ## 400 error
 		1. 帐号密码错误
+		{
+		  "success": false,
+		  "code": "INVALID_ACCOUNT_OR_PARSWORD",
+		  "message": "帐号密码错误"
+		}
 		2. 没用权限登陆
+
+#-----------------------(^_^)--------------------------#
+
+# api logout
+## router name: logout
+## path: /api/logout
+## method: GET
+## 200 response body:
+	{
+		success: ture
+	}
+
+#-----------------------(^_^)--------------------------#

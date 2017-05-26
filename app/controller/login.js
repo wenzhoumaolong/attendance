@@ -6,5 +6,10 @@ module.exports = app  => {
 			this.ctx.session.userId = request.body.phone;
 			this.ctx.body = { success: true };
 		}
+
+		* logout() {
+			this.ctx.session.userId = null;
+			this.ctx.body = { success: true };
+		}
 	}
 }
