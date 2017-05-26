@@ -3,59 +3,90 @@ USE `attendance`;
 INSERT INTO 
 	`employee_role` (
 		`id`,
-		`roleName`
+		`name`,
+		`displayName`
 	)
 	 VALUES (
 		1, 
+		'admin',
 		'管理员'
 	);
     
 INSERT INTO 
 	`employee_role` (
 		`id`,
-		`roleName`
+		`name`,
+		`displayName`
 	)
 	 VALUES (
-		2, 
+		2,
+		'warehouseAdmin',
+		'仓库管理员'
+	);
+INSERT INTO 
+	`employee_role` (
+		`id`,
+		`name`,
+		`displayName`
+	)
+	 VALUES (
+		3,
+		'employee',
 		'员工'
 	);
 
 INSERT INTO 
-	`wharehouse` (
-        `wharehouseName`,
-        `wharehouseAddress`,
-        `wharehouseAccount`,
-        `wharehousePassword`,
-        `wharehouseTelphone`,
-        `createDate`,
-        `updateDate`
+	`warehouse` (
+  `name`,
+  `address`,
+  `telphone`,
+  `createDate`,
+  `updateDate`
 	)
-    VALUES (
+  VALUES (
 		'测试仓库',
 		'江苏徐州泉山区',
-        'ceshi',
-        'abc123_',
-        '0516-4625386',
-        NOW(),
-        NOW()
-    );
+    '0516-4625386',
+    NOW(),
+    NOW()
+  );
     
     INSERT INTO 
 		`employee` (
-			`employeeName`,
-			`employeePhone`,
+			`name`,
+			`phone`,
+			`password`,
 			`roleId`,
-            `wharehouseId`,
-            `createDate`,
-            `updateDate`
+      `warehouseId`,
+      `createDate`,
+      `updateDate`
 		)
-        VALUES (
+    VALUES (
 			'王友生',
-            '18801615551',
-            1,
-            1,
-            NOW(),
-            NOW()
-        );
+      '18801615551',
+      'abc123_',
+      1,
+      1,
+      NOW(),
+      NOW()
+  );
+INSERT INTO 
+	`permission` (
+		`id`,
+		`name`,
+    `displayName`
+	) VALUES (
+		'1',
+		'LOGIN',
+    '登陆'
+  );
+INSERT INTO
+	`role_permission_mapping` (
+		`roleId`,
+    `permissionId`
+	) VALUES (
+		1,
+		1
+	);
     
     

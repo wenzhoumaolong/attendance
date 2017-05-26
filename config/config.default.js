@@ -2,6 +2,13 @@ const path = require('path');
 
 module.exports = appInfo => {
   return {
+    // Disable security precautions 
+    security: {
+      xframe: {
+        enable: false,
+      }
+    },
+
     keys: appInfo.name + '1495344987775',
 
     static: {
@@ -46,6 +53,18 @@ module.exports = appInfo => {
       app: true,
       // 是否加载到 agent 上，默认关闭
       agent: false,
-    }
+    },
+
+    // disable csrf
+    security: {
+      csrf: {
+        enable: false,
+      },
+    },
+    middleware: [ 'errorHandler' ],
+    errorHandler: {
+      // 非 `/api/` 路径不在这里做错误处理，留给默认的 onerror 插件统一处理
+      match: '/api',
+    },
   }
 };
