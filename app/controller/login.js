@@ -3,6 +3,7 @@ module.exports = app  => {
 		* login() {
 			const { request, service, params } = this.ctx;
 			yield service.employee.checkAccount(request.body.phone, request.body.password);
+			this.ctx.session.userId = request.body.phone;
 			this.ctx.body = { success: true };
 		}
 	}

@@ -61,10 +61,13 @@ module.exports = appInfo => {
         enable: false,
       },
     },
-    middleware: [ 'errorHandler' ],
+    middleware: [ 'errorHandler', 'sessionValidation' ],
     errorHandler: {
       // 非 `/api/` 路径不在这里做错误处理，留给默认的 onerror 插件统一处理
       match: '/api',
     },
+    sessionValidation: {
+      ignore: '/api/login',
+    }
   }
 };

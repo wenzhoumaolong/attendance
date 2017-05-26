@@ -7,6 +7,10 @@ module.exports = {
   	NO_PERMISSION: {
   		code: 'NO_PERMISSION',
   		message: '没用权限进行此操作',
+  	},
+  	NOT_LOGIN: {
+  		code: 'NOT_LOGIN',
+  		message: '请先登录'
   	}
   },
   permissions: {
