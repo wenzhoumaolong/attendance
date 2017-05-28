@@ -1,19 +1,28 @@
-#-----------------------(^_^)--------------------------#
+# API Document
 
-# api login
-## router name: login
-## path: /api/login
-## method: POST
-## permission: none
-## request body:
-	{
-		"phone": '',
-		"password": ''
+## api login
+### router name: login
+### path: /api/login
+### method: POST
+### permission: none
+### request body:
+<pre><code>
+{
+	"phone": '',
+	"password": ''
+}
+</code></pre>
+### 200 response body:
+<pre><code>
+{
+	  "code": 200,
+	  "data": 
+	  	{ 
+	  		name: "" 
+	  	},
+	  "message": ""
 	}
-## 200 response body:
-	{
-		"success": ture
-	}
+<pre><code>
 ## 400 error
 		1. 帐号密码错误
 		{
