@@ -11,8 +11,8 @@ module.exports = app => {
 
 		* checkAccount(phone, password) {
 			const employee = yield app.mysql.get('employee', { phone, password });
-			if (! is.object(employee)) throw new Error(errors.INVALID_ACCOUNT_OR_PARSWORD.code);
-			yield this.ctx.service.permission.checkPermisson(employee.roleId, permissions.LOGIN_PERMISSSON);
+			if (! is.object(employee)) throw new Error(errors.INVALID_ACCOUNT_OR_PARSWORD);
+			yield this.ctx.service.permission.checkPermission(phone, permissions.LOGIN_PERMISSSON);
 			return true;
 		}
 	}

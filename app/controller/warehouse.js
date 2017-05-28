@@ -1,9 +1,7 @@
 const createRule = {
-  warehouseName: { type: 'string' },
-  warehouseAddress: { type: 'string' },
-  warehouseAccount: { type: 'string' },
-  warehousePassword: { type: 'string' },
-  warehouseTelphone: { type: 'string' },
+  name: { type: 'string' },
+  address: { type: 'string' },
+  telphone: { type: 'string' },
 };
 
 module.exports = app  => {
@@ -27,22 +25,24 @@ module.exports = app  => {
 
 		// --Path /warehouse/:id/edit Method --GET
 		* edit() {
-
+			this.ctx.body = 111;
 		}
 
 		// --Path /warehouse Method --POST
 		* create() {
-			const { cxt, service } = this;
-			cxt.validate(createRule);
-			const result = yield service.warehouse.update(ctx.body)
-			this.body = { result };
+			const { ctx, service } = this;
+			ctx.validate(createRule);
+			const id = yield service.warehouse.create(ctx.request.body);
+			this.ctx.body = { id };
 		}
 
 		// --Path /warehouse/:id Method --PUT
 		* update() {
-			const { ctx, service } = this;
-			const warehouse = yield service.warehouse.find(this.ctx.params.id);
-			this.ctx.body = warehouse;
+			const { ctx, service, params } = this;
+			ctx.validate(createRule);
+			var warehouse = Object.assign({}, ctx.request.body, { id: ctx.params.id, updateDate: new Date() });
+			yield service.warehouse.update(warehouse);
+			this.ctx.body = { success: true };
 		}
 
 		// --Path /warehouse/:id Method --DELETE

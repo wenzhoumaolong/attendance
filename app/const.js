@@ -11,9 +11,21 @@ module.exports = {
   	NOT_LOGIN: {
   		code: 'NOT_LOGIN',
   		message: '请先登录'
-  	}
+  	},
+    INVALID_PARAM: {
+      code: 'invalid_param',
+      message: 'Validation Failed'
+    }
   },
   permissions: {
-  	'LOGIN_PERMISSSON': '1',
-  }
+  	LOGIN_PERMISSSON: 1,
+    MANAER_WAREHOUSE: 2,
+  },
+  permissionCheckRoles: [
+  	{
+  		permission: 'MANAER_WAREHOUSE',
+  		match: ['^/api/warehouse'],
+  		methods: ['POST', 'PUT'],
+  	}
+  ],
 };

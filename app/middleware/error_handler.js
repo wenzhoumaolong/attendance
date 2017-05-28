@@ -1,4 +1,4 @@
-const { errors } = require('../const.js');
+const is = require('is_js');
 
 module.exports = () => {
   return function* errorHandler(next) {
@@ -6,14 +6,18 @@ module.exports = () => {
       yield next;
     } catch (err) {
       this.app.emit('error', err, this);
-      const error = errors[err.message];
-      this.body = error;
-      this.status = error ? 400 : 500;
-      message = error ? error.message : this.app.config.env !== 'prod' ? err.message : 'Internal Server Error';
+      if (is.not.undefined(err.code)) {
+        this.status = 400
+        this.body = {
+          success: false,
+          code: err.code,
+          message: err.message,
+        };
+        return;
+      }
+      this.status = 500;
       this.body = {
-        success: false,
-        code: error.code,
-        message: error.message,
+        message: this.app.config.env !== 'prod' ? err.message : 'Internal Server Error'
       };
     }
   };

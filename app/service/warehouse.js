@@ -9,5 +9,10 @@ module.exports = app => {
 			const result = yield app.mysql.update('warehouse', warehouse);
 			return result.affectedRows === 1;
 		}
+
+		* create(warehouse) {
+			const result = yield app.mysql.insert('warehouse', warehouse);
+			return result.insertId;
+		}
 	}
 }
