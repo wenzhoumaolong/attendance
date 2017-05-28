@@ -18,7 +18,7 @@
 		1. 帐号密码错误
 		{
 		  "success": false,
-		  "code": "INVALID_ACCOUNT_OR_PARSWORD",
+		  "code": "INVALID_ACCOUNT_OR_PASSWORD",
 		  "message": "帐号密码错误"
 		}
 		2. 没用权限登陆
@@ -61,13 +61,21 @@
 ## permession: MANAER_WAREHOUSE
 ## 200 response body:
 	{
-		"success": true
+	  "code": 200,
+	  "data": {},
+	  "message": ""
 	}
 ## 400 errors
 	1. 字段验证失败
 		{
-		  "success": false,
-		  "code": "invalid_param",
+		  "code": 9004,
+		  "data": [
+		    {
+		      "message": "should not be empty",
+		      "code": "invalid",
+		      "field": "telphone"
+		    }
+		  ],
 		  "message": "Validation Failed"
 		}
 
@@ -78,15 +86,31 @@
 ## path: /api/warehouse:id
 ## method: POST
 ## permession: MANAER_WAREHOUSE
+## request body:
+	{
+	  "name": "",
+	  "address": "",
+	  "telphone": ""
+	}
 ## 200 response body:
 	{
-		"id": ""
+	  "code": 200,
+	  "data": {
+	    "id": "" //新创建的仓库Id
+	  },
+	  "message": ""
 	}
 ## 400 errors
 	1. 字段验证失败
 		{
-		  "success": false,
-		  "code": "invalid_param",
+		  "code": 9004,
+		  "data": [
+		    {
+		      "message": "should not be empty",
+		      "code": "invalid",
+		      "field": "telphone"
+		    }
+		  ],
 		  "message": "Validation Failed"
 		}
 

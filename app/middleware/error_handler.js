@@ -1,4 +1,5 @@
-const is = require('is_js');
+const Transfer = require('../model/response');
+const { INVALID_PARAM } = require('../error');
 
 module.exports = () => {
   return function* errorHandler(next) {
@@ -6,13 +7,8 @@ module.exports = () => {
       yield next;
     } catch (err) {
       this.app.emit('error', err, this);
-      if (is.not.undefined(err.code)) {
-        this.status = 400
-        this.body = {
-          success: false,
-          code: err.code,
-          message: err.message,
-        };
+      if (err.code === 'invalid_param') {
+        this.body = new Transfer(INVALID_PARAM, err.errors);
         return;
       }
       this.status = 500;

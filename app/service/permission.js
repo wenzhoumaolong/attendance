@@ -17,8 +17,7 @@ module.exports = app => {
 				'INNER JOIN `role_permission_mapping`' + 
 					'ON employee.phone = ? AND employee.roleId = role_permission_mapping.roleId ' +
 				'WHERE role_permission_mapping.permissionid = ?', [userId, permissionId]);
-			if (is.undefined(mapping) || mapping.length <= 0) throw createError(errors.NO_PERMISSION);
-			return true;
+			return mapping && mapping.length > 0;
 		}
 	}
 }

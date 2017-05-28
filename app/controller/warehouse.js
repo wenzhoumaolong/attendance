@@ -3,6 +3,7 @@ const createRule = {
   address: { type: 'string' },
   telphone: { type: 'string' },
 };
+const Transfer = require('../model/response');
 
 module.exports = app  => {
 	return class warehouseController extends app.Controller {
@@ -20,7 +21,7 @@ module.exports = app  => {
 		* show() {
 			const { ctx, service } = this;
 			const warehouse = yield service.warehouse.find(this.ctx.params.id);
-			this.ctx.body = warehouse;
+			this.ctx.body = new Transfer(200, warehouse);
 		}
 
 		// --Path /warehouse/:id/edit Method --GET
@@ -33,7 +34,7 @@ module.exports = app  => {
 			const { ctx, service } = this;
 			ctx.validate(createRule);
 			const id = yield service.warehouse.create(ctx.request.body);
-			this.ctx.body = { id };
+			this.ctx.body = new Transfer(200, { id });
 		}
 
 		// --Path /warehouse/:id Method --PUT
@@ -42,7 +43,7 @@ module.exports = app  => {
 			ctx.validate(createRule);
 			var warehouse = Object.assign({}, ctx.request.body, { id: ctx.params.id, updateDate: new Date() });
 			yield service.warehouse.update(warehouse);
-			this.ctx.body = { success: true };
+			this.ctx.body = new Transfer();
 		}
 
 		// --Path /warehouse/:id Method --DELETE

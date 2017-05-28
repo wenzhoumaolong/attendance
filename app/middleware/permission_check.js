@@ -1,5 +1,6 @@
-const { permissions, permissionCheckRoles } = require('../const.js');
-const is = require('is_js');
+const { permissions, permissionCheckRoles } = require('../const');
+const Transfer = require('../model/response');
+const { NO_PERMISSION } = require('../error')
 
 module.exports = () => {
 	return function* permissionCheck(next) {
@@ -16,11 +17,15 @@ module.exports = () => {
 			return matchResult && item.methods.indexOf(this.method) >= 0;
 		});
 		
-		if (is.array(checkRoles) && checkRoles.length > 0) {
+		if (checkRoles && checkRoles.length > 0) {
 			// yield can not used in foreach function.
 			for (var i = 0; i < checkRoles.length; i++) {
 				var role = checkRoles[i];
-				yield this.service.permission.checkPermission(userId, permissions[role.permission]);
+				const hasPermission = yield this.service.permission.checkPermission(userId, permissions[role.permission]);
+				if (! hasPermission) {
+					this.body = new Transfer(NO_PERMISSION);
+					return;
+				}
 			}
 		}
 		yield next;
