@@ -27,9 +27,9 @@
 1. 帐号密码错误
 <pre><code>
 {
-  "success": false,
-  "code": "INVALID_ACCOUNT_OR_PASSWORD",
-  "message": "帐号密码错误"
+  "code": 9001,
+  "data": {},
+  "message": "账号或密码错误"
 }
 </code></pre>
 2. 没用权限登陆
