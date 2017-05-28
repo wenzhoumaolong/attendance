@@ -17,7 +17,7 @@
 		1. 帐号密码错误
 		{
 		  "success": false,
-		  "code": "INVALID_ACCOUNT_OR_PARSWORD",
+		  "code": "INVALID_ACCOUNT_OR_PASSWORD",
 		  "message": "帐号密码错误"
 		}
 		2. 没用权限登陆

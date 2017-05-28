@@ -1,32 +1,43 @@
-import { loginByEmail, logout, getInfo } from 'api/login';
+import { login, logout, getInfo } from 'api/login';
 import Cookies from 'js-cookie';
+
+const SET_PHONE = 'SET_PHONE'
+const SET_NAME = 'SET_NAME'
+const SET_PERMISSIONS = 'SET_PERMISSIONS'
 
 const user = {
   state: {
-    user: '',
-    status: '',
-    email: '',
-    token: Cookies.get('Admin-Token'),
-    name: '',
-    roles: [],
+    phone: decodeURIComponent(Cookies.get('phone') || ''),
+    name: decodeURIComponent(Cookies.get('name') || ''),
+    permissions: [],
   },
 
   mutations: {
+    [SET_PHONE](state, phone) {
+      state.phone = phone
+    },
+    [SET_NAME](state, name) {
+      state.name = name
+    },
+    [SET_PERMISSIONS](state, permissions) {
+      state.permissions = permissions
+    }
   },
 
   actions: {
-    // 邮箱登录
-    LoginByEmail({ commit }, {email, password}) {
+    Login({ commit }, { phone, password }) {
       return new Promise((resolve, reject) => {
-        loginByEmail(email.trim(), password).then(response => {
-          const data = response.data;
-          Cookies.set('Admin-Token', response.data.token);
-          commit('SET_TOKEN', data.token);
-          commit('SET_EMAIL', email.trim());
-          resolve();
+        phone = phone.trim();
+        login(phone, password).then(response => {
+          const name = response.data.name.trim();
+          commit(SET_PHONE, phone);
+          commit(SET_NAME, name);
+
+          Cookies.set('phone', encodeURIComponent(phone));
+          Cookies.set('name', encodeURIComponent(name));
+          resolve(response);
         }).catch(error => {
-          resolve();
-          // reject(error);
+          reject(error);
         });
       });
     },
@@ -37,8 +48,8 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
           const data = response.data;
-          commit('SET_ROLES', data.role);
-          commit('SET_NAME', data.name);
+          commit(SET_PERMISSIONS, data.role);
+          commit(SET_NAME, data.name);
           resolve(response);
         }).catch(error => {
           // reject(error);

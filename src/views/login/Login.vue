@@ -6,7 +6,7 @@
         <span class="svg-container">
           <icon class="icon" name="envelope"></icon>
         </span>
-        <el-input name="email" type="text" v-model="loginForm.email" placeholder="邮箱"></el-input>
+        <el-input name="email" type="text" v-model="loginForm.phone" placeholder="手机号码"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
@@ -22,8 +22,6 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
-
   export default {
     name: 'Login',
     data() {
@@ -36,37 +34,32 @@
       };
       return {
         loginForm: {
-          email: 'admin@wallstreetcn.com',
+          phone: '',
           password: ''
         },
         loginRules: {
           password: [
-            {required: true, trigger: 'blur', validator: validatePass}
+            { required: true, trigger: 'blur', validator: validatePass }
           ]
         },
         loading: false,
         showDialog: false
       }
     },
-    computed: {
-      ...mapGetters([
-        'auth_type'
-      ])
-    },
     methods: {
       handleLogin() {
         this.$refs.loginForm.validate(valid => {
           if (valid) {
             this.loading = true;
-            this.$store.dispatch('LoginByEmail', this.loginForm).then(() => {
+            this.$store.dispatch('Login', this.loginForm).then(() => {
               this.loading = false;
-              this.$router.push({path: '/'});
+              this.$router.push({ path: '/' });
             }).catch(err => {
               this.loading = false;
-              this.$message.error(err);
+              this.$message.error(err.message);
             });
           } else {
-            console.log('error submit!!');
+            this.$message.error('出现一点小问题，请稍后再试。');
             return false;
           }
         });
@@ -122,5 +115,4 @@
       color: #454545;
     }
   }
-
 </style>

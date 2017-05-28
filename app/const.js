@@ -1,7 +1,7 @@
 module.exports = {
   errors: {
-  	INVALID_ACCOUNT_OR_PARSWORD: {
-  		code: 'INVALID_ACCOUNT_OR_PARSWORD',
+    INVALID_ACCOUNT_OR_PASSWORD: {
+  		code: 'INVALID_ACCOUNT_OR_PASSWORD',
   		message: '帐号密码错误',
   	},
   	NO_PERMISSION: {

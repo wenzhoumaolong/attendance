@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = appInfo => {
   return {
-    // Disable security precautions 
+    // Disable security precautions
     security: {
       xframe: {
         enable: false,
@@ -45,7 +45,7 @@ module.exports = appInfo => {
         // 用户名
         user: 'root',
         // 密码
-        password: 'abc123_',
+        password: 'root',
         // 数据库名
         database: 'attendance',
       },
