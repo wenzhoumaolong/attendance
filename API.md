@@ -8,8 +8,8 @@
 ### request body:
 <pre><code>
 {
-	"phone": '',
-	"password": ''
+	"phone": "",
+	"password": ""
 }
 </code></pre>
 ### 200 response body:
