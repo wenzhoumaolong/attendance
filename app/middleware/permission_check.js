@@ -21,7 +21,7 @@ module.exports = () => {
 			// yield can not used in foreach function.
 			for (var i = 0; i < checkRoles.length; i++) {
 				var role = checkRoles[i];
-				const hasPermission = yield this.service.permission.checkPermission('18801615551', permissions[role.permission]);
+				const hasPermission = yield this.service.permission.checkPermission(userId, permissions[role.permission]);
 				if (! hasPermission) {
 					this.body = new Transfer(NO_PERMISSION);
 					return;
