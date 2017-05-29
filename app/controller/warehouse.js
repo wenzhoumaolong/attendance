@@ -9,6 +9,10 @@ module.exports = app  => {
 	return class warehouseController extends app.Controller {
 		// --Path /warehouse Method --GET
 		* index() {
+			const userId = this.ctx.session.userId;
+			const { ctx, service } = this;
+			const warehouse = yield service.warehouse.findByUserId(userId);
+			this.ctx.body = new Transfer(200, warehouse);
 		}
 
 		// --Path /warehouse/filter Method --POST

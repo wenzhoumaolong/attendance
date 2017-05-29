@@ -7,7 +7,12 @@ module.exports = {
   	{
   		permission: 'MANAER_WAREHOUSE',
   		match: ['^/api/warehouse'],
-  		methods: ['POST', 'PUT', 'GET'],
-  	}
+  		methods: ['POST', 'PUT'],
+  	},
+    {
+      permission: 'MANAER_WAREHOUSE',
+      match: ['^/api/warehouse/'],
+      methods: ['GET'],
+    }
   ],
 };

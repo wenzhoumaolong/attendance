@@ -31,8 +31,25 @@ module.exports = app => {
 				whereStr = whereStr + (is.empty(whereStr) ? 'WHERE' : 'AND') +
 				' `telphone` LIKE ' + mysql.escape( `%${telphone}%`);
 			}
-			const result = mysql.query('SELECT * FROM `warehouse`' + whereStr);
+			const result = yield mysql.query('SELECT * FROM `warehouse`' + whereStr);
 			return result;
+		}
+
+		/*
+		SELECT warehouse.* 
+		FROM `employee`
+			INNER JOIN `warehouse`
+				ON employee.phone = '18801615551' AND employee.warehouseId = warehouse.id
+		*/
+
+		* findByUserId(userId) {
+			const warehouses = yield app.mysql.query('SELECT warehouse.* FROM `employee` ' +
+											'INNER JOIN `warehouse` ' +
+											'ON employee.phone = ? AND employee.warehouseId = warehouse.id', [userId]);
+			if (warehouses && warehouses.length >= 1) {
+				return warehouses[0];
+			}
+			return {};
 		}
 	}
 }

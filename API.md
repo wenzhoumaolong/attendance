@@ -52,10 +52,32 @@
 </code></pre>
 
 ## api get warehouse
+### 获取登录人所在的仓库的仓库信息
+### router name: warehouse
+### path: /api/warehouse
+### method: GET
+### permission none
+### 200 response body:
+<pre><code>
+{
+  "code": 200,
+  "data": {
+    "id": 1,
+    "name": "测试仓库",
+    "address": "江苏徐州泉山区",
+    "telphone": "0516-4625386",
+    "createDate": "2017-05-28T07:33:27.000Z",
+    "updateDate": "2017-05-28T07:33:27.000Z"
+  },
+  "message": ""
+}
+</code></pre>
+
+## api get warehouse
 ### router name: warehouse
 ### path: /api/warehouse:id
 ### method: GET
-### permission: none
+### permission: MANAER_WAREHOUSE
 ### 200 response body:
 <pre><code>
 {
