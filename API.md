@@ -141,3 +141,39 @@
 }
 </code></pre>
 2. 权限验证失败
+
+## api filter warehouse
+### router name: filterWarehouse
+### path: /api/warehouse/filter
+### method: POST
+### permission: MANAER_WAREHOUSE
+### request body:
+<pre><code>
+{
+  "name": "",
+  "address": "",
+  "telphone": ""
+}
+### 200 reponse body:
+{
+  "code": 200,
+  "data": [
+    {
+      "id": 1,
+      "name": "测试仓库",
+      "address": "江苏徐州泉山区",
+      "telphone": "0516-4625386",
+      "createDate": "2017-05-28T07:33:27.000Z",
+      "updateDate": "2017-05-28T07:33:27.000Z"
+    },
+    {
+      "id": 2,
+      "name": "4",
+      "address": "5",
+      "telphone": "3",
+      "createDate": "2017-05-28T10:44:27.000Z",
+      "updateDate": "2017-05-28T10:56:34.000Z"
+    }
+  ],
+  "message": ""
+}

@@ -9,7 +9,14 @@ module.exports = app  => {
 	return class warehouseController extends app.Controller {
 		// --Path /warehouse Method --GET
 		* index() {
+		}
 
+		// --Path /warehouse/filter Method --POST
+		* filter() {
+			const { ctx, service } = this;
+			const { name, address, telphone } = ctx.request.body;
+			const result = yield service.warehouse.filter(name, address, telphone);
+			this.ctx.body = new Transfer(200, result);
 		}
 
 		// --Path /warehouse/new Method --GET
@@ -20,8 +27,8 @@ module.exports = app  => {
 		// --Path /warehouse/:id Method --GET
 		* show() {
 			const { ctx, service } = this;
-			const warehouse = yield service.warehouse.find(this.ctx.params.id);
-			this.ctx.body = new Transfer(200, warehouse);
+			const warehouses = yield service.warehouse.find(this.ctx.params.id);
+			this.ctx.body = new Transfer(200, warehouses);
 		}
 
 		// --Path /warehouse/:id/edit Method --GET
