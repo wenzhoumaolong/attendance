@@ -93,6 +93,15 @@
 	"message": ""
 }
 </code></pre>
+### error:
+1. 仓库不存在
+<pre><code>
+{
+  "code": 9006,
+  "data": {},
+  "message": "仓库不存在"
+}
+</code></pre>
 
 ## api update warehouse
 ### router name: warehouse
@@ -199,3 +208,35 @@
   ],
   "message": ""
 }
+
+## api delete warehouse
+### router name: warehouse
+### path: /api/warehouse
+### method: DELETE
+### permission: MANAGER_WAREHOUSE
+### 200 response body:
+<pre><code>
+{
+  "code": 200,
+  "data": {},
+  "message": ""
+}
+</code></pre>
+### errors:
+1. 删除仓库前，请先删除仓库中的人员
+<pre><code>
+{
+  "code": 9005,
+  "data": {},
+  "message": "删除仓库前，请先删除仓库中的人员"
+}
+</code></pre>
+
+2. 仓库不存在
+<pre><code>
+{
+  "code": 9006,
+  "data": {},
+  "message": "仓库不存在"
+}
+</code></pre>

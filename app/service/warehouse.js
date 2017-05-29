@@ -1,4 +1,5 @@
 const is = require('is_js');
+const { WAREHOUSE_HAS_EMPLOYEE, NOT_EXIST_WAREHOUSE } = require('../error');
 
 module.exports = app => {
 	return class WarehouseService extends app.Service {
@@ -50,6 +51,19 @@ module.exports = app => {
 				return warehouses[0];
 			}
 			return {};
+		}
+
+		* delete(id) {
+			const hasEmployee = yield this.service.employee.checkWarehouseEmployee(id);
+			if (hasEmployee) {
+				return { success: false, error: WAREHOUSE_HAS_EMPLOYEE };
+			}
+			const result = yield app.mysql.delete('warehouse', { id });
+			if (result.affectedRows === 1) {
+				return { success: true }
+			} else {
+				return { success: false, error: NOT_EXIST_WAREHOUSE };
+			}
 		}
 	}
 }

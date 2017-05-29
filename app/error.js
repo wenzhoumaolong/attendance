@@ -13,6 +13,14 @@ module.exports = {
 	},
 	INVALID_PARAM: {
     code: 9004,
-    message: 'Validation Failed'
+    message: '验证字段失败'
+  },
+  WAREHOUSE_HAS_EMPLOYEE: {
+  	code: 9005,
+  	message: '删除仓库前，请先删除仓库中的人员'
+  },
+  NOT_EXIST_WAREHOUSE: {
+  	code: 9006,
+  	message: '仓库不存在'
   }
 }

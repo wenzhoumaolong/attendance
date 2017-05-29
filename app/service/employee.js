@@ -9,5 +9,14 @@ module.exports = app => {
 		* checkAccount(phone, password) {
 			return yield app.mysql.get('employee', { phone, password });
 		}
+
+		* checkWarehouseEmployee(warehouseId) {
+			const result = yield app.mysql.select('employee', {
+				where: { warehouseId },
+				limit: 1,
+				offset: 0
+			});
+			return result && result.length === 1;
+		}
 	}
 }
