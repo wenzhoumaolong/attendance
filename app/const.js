@@ -19,6 +19,11 @@ module.exports = {
       permission: 'MANAGE_EMPOLYEE',
       match: ['^/api/employee'],
       methods: ['GET', 'POST', 'PUT']
+    },
+    {
+      permission: 'LOGIN_PERMISSSON',
+      match: ['^/api/permission'],
+      methods:['GET']
     }
   ],
 };
