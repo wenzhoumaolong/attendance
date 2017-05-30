@@ -1,3 +1,4 @@
+
 # API Document
 
 ## api login
@@ -307,7 +308,7 @@
 ### router name: employee
 ### path: /api/employee
 ### method: PUT
-### permission MANAGE_EMPLOYEE
+### permission: MANAGE_EMPLOYEE
 ### 200 response body:
 <pre>
   <code>
@@ -342,3 +343,35 @@
   "message": "电话号码已存在"
 }
 </code></pre>
+
+## api get permissions
+### router name: permission
+### path: /api/permission
+### method: GET
+### permission: none
+### 200 response body:
+<pre>
+  <code>
+  {
+    "code": 200,
+    "data": [
+      {
+        "id": 1,
+        "name": "LOGIN",
+        "displayName": "登陆"
+      },
+      {
+        "id": 2,
+        "name": "MANAGE_WAREHOUSE",
+        "displayName": "管理仓库"
+      },
+      {
+        "id": 3,
+        "name": "MANAGE_ENPLOYEE",
+        "displayName": "管理员工"
+      }
+    ],
+    "message": ""
+  }
+  </code>
+</pre>

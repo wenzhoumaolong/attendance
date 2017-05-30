@@ -35,6 +35,7 @@ module.exports = appInfo => {
       debug: false,
       compileDebug: true
     },
+    defaultPassword: '111111',
 
     mysql: {
       client: {
