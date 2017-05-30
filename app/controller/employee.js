@@ -15,7 +15,7 @@ module.exports = app  => {
 
 		// --Path /employee/new Method --GET
 		* new() {
-			this.ctx = 111;
+			this.ctx.body = 111;
 		}
 
 		// --Path /employee/:id Method --GET
@@ -34,8 +34,7 @@ module.exports = app  => {
 		* create() {
 			const { ctx, service } = this;
 			ctx.validate(createRule);
-			// const userId = this.ctx.session.userId;
-			const userId = '18801615551';
+			const userId = this.ctx.session.userId;
 			const existEmployee = yield ctx.service.employee.findByPhone(ctx.request.body.phone);
 			if (existEmployee) {
 				this.ctx.body = new Transfer(EXIST_PHONE);

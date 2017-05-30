@@ -4,8 +4,8 @@ const { NO_PERMISSION } = require('../error')
 
 module.exports = () => {
 	return function* permissionCheck(next) {
-		// const userId = this.session.userId;
-		const userId = '18801615551';
+		const userId = this.session.userId;
+		// const userId = '18801615551';
 		const checkRoles = permissionCheckRoles.filter((item) => {
 			var matchResult = false;
 			item.match.map((regStr) => {
