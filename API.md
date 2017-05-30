@@ -302,3 +302,43 @@
   "message": "电话号码已存在"
 }
 </code></pre>
+
+## api update employee
+### router name: employee
+### path: /api/employee
+### method: PUT
+### permission MANAGE_EMPLOYEE
+### 200 response body:
+<pre>
+  <code>
+  {
+    "code": 200,
+    "data": {},
+    "message": ""
+  }
+  </code>
+</pre>
+### errors
+1. 字段验证失败
+<pre><code>
+{
+  "code": 9004,
+  "data": [
+    {
+      "message": "should be an integer",
+      "code": "invalid",
+      "field": "roleId"
+    }
+  ],
+  "message": "验证字段失败"
+}
+</code></pre>
+
+2. 电话已存在
+<pre><code>
+{
+  "code": 9007,
+  "data": {},
+  "message": "电话号码已存在"
+}
+</code></pre>

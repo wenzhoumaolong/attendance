@@ -32,7 +32,7 @@ module.exports = app  => {
 
 		// --Path /employee Method --POST
 		* create() {
-			const { ctx, service } = this;
+			const { ctx, service, config } = this;
 			ctx.validate(createRule);
 			const userId = this.ctx.session.userId;
 			const existEmployee = yield ctx.service.employee.findByPhone(ctx.request.body.phone);
@@ -41,14 +41,24 @@ module.exports = app  => {
 				return;
 			}
 			const { warehouseId } = yield ctx.service.employee.findByPhone(userId);
-			const newEmployee = Object.assign({}, ctx.request.body, { warehouseId });
-			const id = yield ctx.service.employee.create(newEmployee);
+			const { name, phone, roleId } = ctx.request.body;
+			const id = yield ctx.service.employee.create({ name, phone, roleId, warehouseId, password: config.defaultPassword });
 			this.ctx.body = new Transfer(200, { id });
 		}
 
 		// --Path /employee/:id Method --PUT
 		* update() {
-
+			const { ctx, service } = this;
+			ctx.validate(createRule);
+			const existEmployee = yield ctx.service.employee.findByPhone(ctx.request.body.phone);
+			console.log(ctx.params.id);
+			if (existEmployee && existEmployee.id !== parseInt(ctx.params.id)) {
+				this.ctx.body = new Transfer(EXIST_PHONE);
+				return;
+			}
+			const { name, phone, roleId } = ctx.request.body;
+			yield ctx.service.employee.update({ id: ctx.params.id, name, phone, roleId });
+			this.ctx.body = new Transfer();
 		}
 
 		// --Path /employee/:id Method --DELETE

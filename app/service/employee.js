@@ -37,5 +37,10 @@ module.exports = app => {
 			const result = yield app.mysql.insert('employee', employee);
 			return result.insertId;
 		}
+
+		* update(employee) {
+			const result = yield app.mysql.update('employee', employee);
+			return result.affectedRows === 1;
+		}
 	}
 }

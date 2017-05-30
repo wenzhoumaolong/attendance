@@ -49,7 +49,8 @@ module.exports = app  => {
 		* create() {
 			const { ctx, service } = this;
 			ctx.validate(createRule);
-			const id = yield service.warehouse.create(ctx.request.body);
+			const { name, address, telphone } = ctx.request.body;
+			const id = yield service.warehouse.create({ name, address, telphone });
 			this.ctx.body = new Transfer(200, { id });
 		}
 
@@ -57,8 +58,8 @@ module.exports = app  => {
 		* update() {
 			const { ctx, service } = this;
 			ctx.validate(createRule);
-			const warehouse = Object.assign({}, ctx.request.body, { id: ctx.params.id, updateDate: new Date() });
-			yield service.warehouse.update(warehouse);
+			const { name, address, telphone } = ctx.request.body;
+			yield service.warehouse.update({ name, address, telphone, id: ctx.params.id, updateDate: new Date() });
 			this.ctx.body = new Transfer();
 		}
 
