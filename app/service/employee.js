@@ -2,8 +2,17 @@ const Transfer = require('../model/response');
 
 module.exports = app => {
 	return class EmployeeService extends app.Service {
-		* find(id) {
-			return yield app.mysql.get('employee', { id });
+		* find(id, userId) {
+			const employee = yield app.mysql.query('SELECT e.`id`, e.`name`, e.`phone`, e.`warehouseId`, e.`RFID`, e.`createDate`, e.`updateDate` '+
+																							'FROM `employee` ' +
+																							'INNER JOIN `employee` e ' +
+																							'ON employee.phone = ? AND e.warehouseId = employee.id ' +
+																							'WHERE e.id = ?', [userId, id]);
+			if (employee && employee.length > 0) {
+				return employee[0];
+			}
+
+			return {};
 		}
 
 		* checkAccount(phone, password) {
@@ -17,6 +26,16 @@ module.exports = app => {
 				offset: 0
 			});
 			return result && result.length === 1;
+		}
+
+		* findByPhone(phone) {
+			const employee = yield app.mysql.get('employee', { phone });
+			return employee;
+		}
+
+		* create(employee) {
+			const result = yield app.mysql.insert('employee', employee);
+			return result.insertId;
 		}
 	}
 }

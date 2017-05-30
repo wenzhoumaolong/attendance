@@ -1,18 +1,24 @@
 module.exports = {
   permissions: {
   	LOGIN_PERMISSSON: 1,
-    MANAER_WAREHOUSE: 2,
+    MANAGE_WAREHOUSE: 2,
+    MANAGE_EMPOLYEE: 3,
   },
   permissionCheckRoles: [
   	{
-  		permission: 'MANAER_WAREHOUSE',
+  		permission: 'MANAGE_WAREHOUSE',
   		match: ['^/api/warehouse'],
   		methods: ['POST', 'PUT', 'DELETE'],
   	},
     {
-      permission: 'MANAER_WAREHOUSE',
+      permission: 'MANAGE_WAREHOUSE',
       match: ['^/api/warehouse/'],
       methods: ['GET'],
+    },
+    {
+      permission: 'MANAGE_EMPOLYEE',
+      match: ['^/api/employee'],
+      methods: ['GET']
     }
   ],
 };

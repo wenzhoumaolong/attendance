@@ -240,3 +240,65 @@
   "message": "仓库不存在"
 }
 </code></pre>
+
+## api get employee by id
+### router name: employee
+### path: /api/employee/:id
+### method: GET
+### permission: MANAGE_EMPLOYEE
+### 200 response body:
+<pre><code>
+{
+  "code": 200,
+  "data": {
+    "id": 1,
+    "name": "王友生",
+    "phone": "18801615551",
+    "warehouseId": 1,
+    "RFID": null,
+    "createDate": "2017-05-28T07:33:27.000Z",
+    "updateDate": "2017-05-28T07:33:27.000Z"
+  },
+  "message": ""
+}
+</code></pre>
+
+## api create employee
+### router name: employee
+### path: /api/employee
+### method: POST
+### permission: MANAGE_EMPLOYEE
+### 200 response body:
+<pre><code>
+{
+  "code": 200,
+  "data": {
+    "id": 3
+  },
+  "message": ""
+}
+</code></pre>
+### errors
+1. 字段验证失败
+<pre><code>
+{
+  "code": 9004,
+  "data": [
+    {
+      "message": "should be an integer",
+      "code": "invalid",
+      "field": "roleId"
+    }
+  ],
+  "message": "验证字段失败"
+}
+</code></pre>
+
+2. 电话已存在
+<pre><code>
+{
+  "code": 9007,
+  "data": {},
+  "message": "电话号码已存在"
+}
+</code></pre>

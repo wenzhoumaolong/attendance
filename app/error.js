@@ -22,5 +22,9 @@ module.exports = {
   NOT_EXIST_WAREHOUSE: {
   	code: 9006,
   	message: '仓库不存在'
+  },
+  EXIST_PHONE: {
+  	code: 9007,
+  	message: '电话号码已存在'
   }
 }

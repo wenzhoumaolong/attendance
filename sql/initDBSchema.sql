@@ -41,7 +41,7 @@ CREATE TABLE `employee` (
 	`warehouseId` INT NOT NULL,
     `RFID` VARCHAR(50),
     `createDate` DATETIME NOT NULL DEFAULT NOW(),
-    `updateDate` DATETIME NOT NULL DEFAULT NOW(),
+    `updateDate` DATETIME NOT NULL DEFAULT NOW()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `observer_relation` (
@@ -64,7 +64,7 @@ CREATE TABLE `attendance_record` (
 	`id` INT PRIMARY KEY AUTO_INCREMENT,
     `employeeId` INT NOT NULL REFERENCES employee(id),
     `recordType` VARCHAR(50) NOT NULL,
-    `createDate` DATETIME DELETE NOW(),
+    `createDate` DATETIME DEFAULT NOW()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `role_permission_mapping` ADD CONSTRAINT `role_permission_mapping_roleId` FOREIGN KEY (`roleId`) REFERENCES employee_role(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
@@ -75,3 +75,4 @@ ALTER TABLE `attendance_record` ADD CONSTRAINT `attendance_record_employeeId` FO
 ALTER TABLE `wechat_information` ADD CONSTRAINT `wechat_information` FOREIGN KEY (`employeeId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE `observer_relation` ADD CONSTRAINT `observer_relation_observerId` FOREIGN KEY (`observerId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE `observer_relation` ADD CONSTRAINT `observer_relation_observedId` FOREIGN KEY (`observedId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE `attendance`.`employee` ADD UNIQUE INDEX `phone_UNIQUE` (`phone` ASC);

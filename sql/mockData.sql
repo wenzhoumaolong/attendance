@@ -16,7 +16,7 @@ INSERT INTO
     NOW()
   );
     
-    INSERT INTO 
+INSERT INTO 
 		`employee` (
 			`name`,
 			`phone`,
