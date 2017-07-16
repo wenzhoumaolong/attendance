@@ -2,11 +2,11 @@
   <div class="login-container">
     <el-form :model="loginForm" :rules="loginRules" ref="loginForm" class="login-form">
       <h3 class="title">系统登录</h3>
-      <el-form-item prop="email">
+      <el-form-item prop="phone">
         <span class="svg-container">
           <icon class="icon" name="envelope"></icon>
         </span>
-        <el-input name="email" type="text" v-model="loginForm.email" placeholder="邮箱"></el-input>
+        <el-input name="phone" type="text" v-model="loginForm.phone" placeholder="邮箱"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
@@ -36,7 +36,7 @@
       };
       return {
         loginForm: {
-          email: 'admin@wallstreetcn.com',
+          phone: '18801615551',
           password: ''
         },
         loginRules: {
@@ -58,9 +58,11 @@
         this.$refs.loginForm.validate(valid => {
           if (valid) {
             this.loading = true;
-            this.$store.dispatch('LoginByEmail', this.loginForm).then(() => {
+            this.$store.dispatch('LoginByPhone', this.loginForm).then((response) => {
               this.loading = false;
-              this.$router.push({path: '/'});
+              if (response.code == 200) {
+                this.$router.push({path: '/'});
+              }
             }).catch(err => {
               this.loading = false;
               this.$message.error(err);

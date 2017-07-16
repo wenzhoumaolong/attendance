@@ -1,4 +1,4 @@
-import { loginByEmail, logout, getInfo } from 'api/login';
+import { loginByEmail, logout, getInfo, LoginByPhone } from 'api/login';
 import Cookies from 'js-cookie';
 
 const user = {
@@ -23,6 +23,22 @@ const user = {
           Cookies.set('Admin-Token', response.data.token);
           commit('SET_TOKEN', data.token);
           commit('SET_EMAIL', email.trim());
+          resolve();
+        }).catch(error => {
+          resolve();
+          // reject(error);
+        });
+      });
+    },
+
+    LoginByPhone({ commit }, {phone, password}) {
+      return new Promise((resolve, reject) => {
+        LoginByPhone(phone.trim(), password).then(response => {
+          console.log(response);
+          const data = response.data;
+          Cookies.set('Admin-Token', response.data.token);
+          commit('SET_TOKEN', data.token);
+          commit('SET_EMAIL', phone.trim());
           resolve();
         }).catch(error => {
           resolve();

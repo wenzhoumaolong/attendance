@@ -27,3 +27,15 @@ export function getInfo(token) {
   });
 }
 
+export function loginByPhone(phone, password) {
+  const data = {
+    phone,
+    password
+  };
+  return fetch({
+    url: '/api/login',
+    method: 'post',
+    data
+  })
+}
+
