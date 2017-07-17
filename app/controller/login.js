@@ -7,20 +7,20 @@ module.exports = app  => {
 	return class LoginController extends app.Controller {
 		* login() {
 			const { request, service } = this.ctx;
-			const { phone, password } = request.body;
+			const { username, password } = request.body;
 
-			if (!phone || !password) {
+			if (!username || !password) {
 				this.ctx.body = new Transfer(INVALID_ACCOUNT_OR_PASSWORD);
 				return;
 			}
 
-			const employee = yield service.employee.checkAccount(phone, password);
+			const admin = yield service.admin.checkAccount(username, password);
 
-			if (employee) {
+			if (admin) {
 				// const hasPermission = yield service.permission.checkPermission(phone, permissions.LOGIN_PERMISSSON);
 				// if (hasPermission) {
-					// this.ctx.session.userId = phone;
-					this.ctx.body = new Transfer(200, { name: employee.name });
+					this.ctx.session.userId = username;
+					this.ctx.body = new Transfer(200, { name: username });
 					return;
 				// } else {
 				// 	this.ctx.body = new Transfer(NO_PERMISSION);
