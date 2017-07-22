@@ -84,6 +84,12 @@ CREATE TABLE `attendance_record` (
     `createDate` DATETIME DEFAULT NOW()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `rfid` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `identity` VARCHAR(50) NOT NULL,
+    `status` VARCHAR(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- ALTER TABLE `role_permission_mapping` ADD CONSTRAINT `role_permission_mapping_roleId` FOREIGN KEY (`roleId`) REFERENCES employee_role(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 -- ALTER TABLE `role_permission_mapping` ADD CONSTRAINT `role_permission_mapping_permissionId` FOREIGN KEY (`permissionId`) REFERENCES permission(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 -- ALTER TABLE `employee` ADD CONSTRAINT `employee_warehouseId` FOREIGN KEY (`warehouseId`) REFERENCES warehouse(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;

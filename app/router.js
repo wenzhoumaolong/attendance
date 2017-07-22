@@ -1,5 +1,6 @@
 module.exports = app => {
   if (app.config.env !== 'prod') {
+    app.post('rfid', '/api/rfid', app.controller.rfid.create);
   	app.post('login', '/api/login', app.controller.login.login);
   	app.get('logout', '/api/logout', app.controller.login.logout);
     app.get('permission', '/api/permission', app.controller.permission.get);

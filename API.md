@@ -377,3 +377,26 @@
   }
   </code>
 </pre>
+
+## api post rfid
+### router name: rfid
+### path: /api/rfid
+### method: POST
+### request body 
+<pre>
+  <code>
+  {
+    "status": "", // NEW: 录入， OUT：出 ， IN 进
+    "identity": "", //串码
+  }
+  </code>
+</pre>
+### response body
+<pre>
+  <code>
+    {"code":200,"data":{},"message":""}
+    {"code":9008,"data":{},"message":"设别串码有误"}
+    {"code":9011,"data":{},"message":"状态码有误"}
+    {"code":9012,"data":{},"message":"找不到此卡持有人"}
+  </code>
+</pre>

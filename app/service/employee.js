@@ -15,6 +15,11 @@ module.exports = app => {
 			return {};
 		}
 
+		* findByRFID(identity) {
+			const employee = app.mysql.get('employee', { RFID: identity });
+			return employee;
+		}
+
 		* checkAccount(phone, password) {
 			return yield app.mysql.get('employee', { phone, password });
 		}
