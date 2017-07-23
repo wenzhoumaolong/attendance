@@ -1,5 +1,9 @@
 const Transfer = require('../model/response');
-const { EXIST_RFID, SYSTEM_ERROR, INVALID_RFID_STATUS, NOT_EXIST_RFID_EMPLOYEE } = require('../error');
+const { EXIST_RFID,
+	SYSTEM_ERROR,
+	INVALID_RFID_STATUS,
+	NOT_EXIST_RFID_EMPLOYEE,
+	NOT_EXIST_RFID } = require('../error');
 
 module.exports = app => {
 	return class AdminService extends app.Service {
@@ -26,6 +30,16 @@ module.exports = app => {
 			}
 
 			return { success: false, error: INVALID_RFID_STATUS };
+		}
+
+		* getNewestRfid() {
+			const rfids = yield app.mysql.query('SELECT * FROM `rfid` ORDER BY `id`  DESC LIMIT 0, 1');
+			if (rfids && rfids.length == 1) {
+				const rfid = rfids[0]
+				const resut = yield app.mysql.delete('rfid', { id: rfid.id });
+				return { success: true, identity: rfid.identity };
+			}
+			return { success: false, error: NOT_EXIST_RFID };
 		}
 	}
 }

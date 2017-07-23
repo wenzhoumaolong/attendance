@@ -25,7 +25,7 @@ module.exports = {
   },
   EXIST_PHONE: {
   	code: 9007,
-  	message: '电话号码已存在'
+  	message: '学号已存在'
   },
   INVALID_IDENTITY: {
     code: 9008,
@@ -46,5 +46,9 @@ module.exports = {
   NOT_EXIST_RFID_EMPLOYEE: {
     code: 9012,
     message: '找不到此卡持有人'
+  },
+  NOT_EXIST_RFID: {
+    code: 9013,
+    message: '找不到卡片信息，请从新刷卡'
   }
 }

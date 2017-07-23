@@ -15,6 +15,35 @@ module.exports = app => {
 			return {};
 		}
 
+		* queryEmployees(name, gradeId, classId, phone, page, pageSize) {
+			var queryStr = 'SELECT name, phone, gradeId, classId FROM `employee` ' +
+												` WHERE name LIKE '%${name}%'`;
+
+			var countStr = 'SELECT COUNT(id) AS totalCount FROM `employee` ' +
+											`WHERE name LIKE '%${name}%'`;
+			if (gradeId) {
+				queryStr += ` AND gradeId = ${gradeId} `;
+				countStr += ` AND gradeId = ${gradeId} `;
+			}
+
+			if (classId) {
+				queryStr += ` AND classId = ${classId} `;
+				countStr += ` AND classId = ${classId} `;
+			}
+
+			if (phone) {
+				queryStr += ` AND phone = '%${phone}%'`;
+				countStr += ` AND phone = '%${phone}%'`;
+			}
+
+			queryStr += ` LIMIT ${(page - 1) * pageSize}, ${pageSize} `;
+			console.log(queryStr);
+
+			const employees = yield app.mysql.query(queryStr);
+			const result = yield app.mysql.query(countStr);
+			return { list: employees, totalCount: result[0].totalCount };
+		}
+
 		* findByRFID(identity) {
 			const employee = app.mysql.get('employee', { RFID: identity });
 			return employee;
@@ -35,6 +64,11 @@ module.exports = app => {
 
 		* findByPhone(phone) {
 			const employee = yield app.mysql.get('employee', { phone });
+			return employee;
+		}
+
+		* findById(id) {
+			const employee = yield app.mysql.get('employee', { id });
 			return employee;
 		}
 

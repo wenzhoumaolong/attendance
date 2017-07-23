@@ -1,7 +1,6 @@
 const { permissions } = require('../const');
 const Transfer = require('../model/response');
 const { INVALID_ACCOUNT_OR_PASSWORD, NO_PERMISSION } = require('../error');
-const ms = require('ms');
 
 module.exports = app  => {
 	return class LoginController extends app.Controller {

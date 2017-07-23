@@ -400,3 +400,39 @@
     {"code":9012,"data":{},"message":"找不到此卡持有人"}
   </code>
 </pre>
+
+## api get rfid
+### router name: rfid
+### path: /api/rfod
+### method: GET
+### response body
+<pre>
+  <code>
+  {"code":9013,"data":{},"message":"找不到卡片信息，请从新刷卡"}
+  </code>
+</pre>
+
+## api post queryRecords
+### router name: record
+### path: /api/record
+### method: POST
+### request body
+<pre>
+  <code>
+  {
+    "startDate": "",
+    "endDate": "",
+    "page": "",
+    "pageSize": "",
+    "name": "",
+    "gradeId": "",
+    "classId": ""
+  }
+  </code>
+</pre>
+### response body
+<pre>
+  <code>
+  {"code":200,"data":[{"name":"王友生","studentId":"11111","type":"出","createDate":"2017-07-22T04:18:18.000Z","classId":"1","gradeId":"1"}],"message":""}
+  </code>
+</pre>

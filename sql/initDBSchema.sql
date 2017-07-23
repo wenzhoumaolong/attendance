@@ -53,9 +53,8 @@ CREATE TABLE `employee` (
 	`id` INT PRIMARY KEY AUTO_INCREMENT,
 	`name` VARCHAR(50) NOT NULL,
     `phone` VARCHAR(50) NOT NULL,
-    `gradeId` VARCHAR(50) NOT NULL,
-    `classId` VARCHAR(50) NOT NULL,
-    `studentId` VARCHAR(50) NOT NULL,
+    `gradeId` INT NOT NULL,
+    `classId` INT NOT NULL,
     `RFID` VARCHAR(50),
     `createDate` DATETIME NOT NULL DEFAULT NOW(),
     `updateDate` DATETIME NOT NULL DEFAULT NOW()

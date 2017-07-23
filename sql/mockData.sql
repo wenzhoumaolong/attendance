@@ -51,16 +51,14 @@ INSERT INTO
 			`phone`,
 			`gradeId`,
       `classId`,
-      `studentId`,
       `createDate`,
       `updateDate`
 		)
     VALUES (
 			'王友生',
-      '18801615551',
-      1,
-      1,
       '11111',
+      1,
+      1,
       NOW(),
       NOW()
   ); 

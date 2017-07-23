@@ -19,5 +19,16 @@ module.exports = app  => {
 			}
 			return;
 		}
+
+		* get() {
+			const { service } = this.ctx;
+			const result = yield service.rfid.getNewestRfid();
+			if (result.success) {
+				this.ctx.body = new Transfer(200, { identity: result.identity });
+			} else {
+				this.ctx.body = new Transfer(result.error);
+			}
+			return;
+		}
 	}
 }
