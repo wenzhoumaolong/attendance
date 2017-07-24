@@ -27,7 +27,9 @@
     "vue": "^2.2.6",
     "vue-awesome": "^2.3.1",
     "vue-router": "^2.5.3",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "wechat-api": "^1.34.0",
+    "wechat-oauth": "^1.2.1"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",

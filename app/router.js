@@ -6,6 +6,7 @@ module.exports = app => {
     app.get('setting', '/api/settings/class', app.controller.settings.getClasses);
   	app.post('login', '/api/login', app.controller.login.login);
   	app.get('logout', '/api/logout', app.controller.login.logout);
+    app.get('wechat', '/api/wechat', app.controller.wechat.get);
     app.post('record', '/api/record', app.controller.record.queryRecords);
     app.get('permission', '/api/permission', app.controller.permission.get);
   	app.resources('employee', '/api/employee', app.controller.employee);
