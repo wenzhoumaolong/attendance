@@ -14,6 +14,8 @@ module.exports = app => {
     app.post('filterWarehouse', '/api/warehouse/filter', app.controller.warehouse.filter);
     app.post('queryemployee', '/api/employee/query', app.controller.employee.queryEmployees);
     app.get('*', app.controller.render.index);
+    app.get('wechat', '/api/wechat/oauth', app.controller.wechat.getOauthSuccess);
+    app.get('wechat', '/api/wechat/get-oauth', app.controller.wechat.getOauthPage);
   } else {
 	app.post('rfid', '/api/rfid', app.controller.rfid.create);
     app.get('rfid', '/api/rfid', app.controller.rfid.get);
@@ -28,5 +30,7 @@ module.exports = app => {
     app.post('filterWarehouse', '/api/warehouse/filter', app.controller.warehouse.filter);
     app.post('queryemployee', '/api/employee/query', app.controller.employee.queryEmployees);
     app.get('*', app.controller.render.index);
+    app.get('wechat', '/api/wechat/oauth', app.controller.wechat.getOauthSuccess);
+    app.get('wechat', '/api/wechat/get-oauth', app.controller.wechat.getOauthPage);
   }
 }
