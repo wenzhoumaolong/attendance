@@ -50,5 +50,9 @@ module.exports = {
   NOT_EXIST_RFID: {
     code: 9013,
     message: '找不到卡片信息，请从新刷卡'
+  },
+  WECHAT_GETINFO_ERROR: {
+    code: 9014,
+    message: '获取信息失败，请稍后再试'
   }
 }

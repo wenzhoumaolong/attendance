@@ -14,8 +14,10 @@ module.exports = app => {
     app.post('filterWarehouse', '/api/warehouse/filter', app.controller.warehouse.filter);
     app.post('queryemployee', '/api/employee/query', app.controller.employee.queryEmployees);
     app.get('*', app.controller.render.index);
-    app.get('wechat', '/api/wechat/oauth', app.controller.wechat.getOauthSuccess);
+    app.get('wechat', '/api/wechat/oauth', app.controller.wechat.getOauthInfo);
+    app.get('wechat', '/api/wechat/bind', app.controller.wechat.bind);
     app.get('wechat', '/api/wechat/get-oauth', app.controller.wechat.getOauthPage);
+    app.get('wechat', '/api/wechat/send-template', app.controller.wechat.sendTemplate);
   } else {
 	app.post('rfid', '/api/rfid', app.controller.rfid.create);
     app.get('rfid', '/api/rfid', app.controller.rfid.get);
@@ -30,7 +32,9 @@ module.exports = app => {
     app.post('filterWarehouse', '/api/warehouse/filter', app.controller.warehouse.filter);
     app.post('queryemployee', '/api/employee/query', app.controller.employee.queryEmployees);
     app.get('*', app.controller.render.index);
-    app.get('wechat', '/api/wechat/oauth', app.controller.wechat.getOauthSuccess);
+    app.get('wechat', '/api/wechat/oauth', app.controller.wechat.getOauthInfo);
+    app.get('wechat', '/api/wechat/bind', app.controller.wechat.bind);
     app.get('wechat', '/api/wechat/get-oauth', app.controller.wechat.getOauthPage);
+    app.get('wechat', '/api/wechat/send-template', app.controller.wechat.sendTemplate);
   }
 }

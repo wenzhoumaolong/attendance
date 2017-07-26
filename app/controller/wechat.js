@@ -1,4 +1,6 @@
 const oauth = require('../utils/wechat_oauth_util');
+const Transfer = require('../model/response');
+const { WECHAT_GETINFO_ERROR } = require('../error');
 
 module.exports = app  => {
 	return class WechatController extends app.Controller {
@@ -9,26 +11,38 @@ module.exports = app  => {
 			return;
 		}
 
-		* getOauthSuccess() {
-			const { request, service } = this.ctx;
-			console.log('22222222222');
-			console.log(this.ctx.query);
-			const { code } = this.ctx.query;
-			const callBack = (err, result) => {
-				console.log('33333333');
-				console.log(result);
-				console.log('444444444');
-				console.log(err);
+		* getOauthInfo() {
+			const { service, query } = this.ctx;
+			const tokenInfo = yield service.wechatoauth.getAccessToken(query.code);
+			if (tokenInfo.errcode) {
+				this.ctx.body = new Transfer(WECHAT_GETINFO_ERROR);
+				return;
 			}
-			yield service.wechatoauth.getOauthSuccess(code, callBack);
-			this.ctx.body = 'success';
+			const { openid, access_token } = tokenInfo;
+			const result = yield service.wechatoauth.getWechatUserInfo(openid, access_token);
+			if (result.errcode) {
+				this.ctx.body = new Transfer(WECHAT_GETINFO_ERROR);
+				return;
+			}
+			this.ctx.body = new Transfer(200, result);
 			return;
 		}
 
 		* getOauthPage() {
-			const { request, service } = this.ctx;
-			const url = yield service.wechatoauth.getAuthorizeURL(1);
+			const { service } = this.ctx;
+			const url = yield service.wechatoauth.getAuthorizeUrl(1);
 			this.ctx.body = url;
+			return;
+		}
+
+		* bind() {
+
+		}
+
+		* sendTemplate() {
+			const { service } = this.ctx;
+			const result = yield service.wechat.sendTemplate();
+			this.ctx.body = 'success';
 			return;
 		}
 	}

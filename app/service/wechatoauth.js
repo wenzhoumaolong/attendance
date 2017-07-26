@@ -1,18 +1,33 @@
-const { getClient } = require('../utils/wechat_oauth_util');
+const urlencode = require('urlencode');
 
 module.exports = app => {
   return class WechatOauthService extends app.Service {  
     * getAuthorizeUrl(state) {
-      return getClient(app).getAuthorizeURL('http://118.190.175.30/api/wechat/oauth', state, 'snsapi_base')
+      const { webchatJSDomain, wechatAppId, wechatAppsecret } = app.config;
+      const url = urlencode(`${webchatJSDomain}/oauth`);
+      return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wechatAppId}&redirect_uri=${url}&response_type=code&scope=snsapi_userinfo&state=${state}#wechat_redirect`;
     }
 
-    * getOauthSuccess(code, callback) {
-      var client = getClient(app);
-      client.getAccessToken(code, callback);
+    * getAccessToken(code) {
+      const { wechatAppId, wechatAppsecret } = app.config;
+      const result = yield app.curl(
+        `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wechatAppId}&secret=${wechatAppsecret}&code=${code}&grant_type=authorization_code`,
+        { 
+          method: 'GET',
+          dataType: 'json'
+        });
+      return result.data;
     }
 
-    * getAccessToken(code, callback) {
-
+    * getWechatUserInfo(openId, access_token) {
+      const result = yield app.curl(
+        `https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openId}&lang=zh_CN`,
+        { 
+          method: 'GET',
+          dataType: 'json'
+        });
+      
+      return result.data;
     }
   }
 }
