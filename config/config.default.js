@@ -40,9 +40,9 @@ module.exports = appInfo => {
       compileDebug: true
     },
     defaultPassword: '111111',
-    webchatJSDomain: 'http://118.190.175.30',
-    wechatAppId: 'wxface34de10d6d723',
-    wechatAppsecret: '21d3c94704e11e36535bd914b1036736',
+    webchatJSDomain: '',
+    wechatAppId: '',
+    wechatAppsecret: '',
 
     mysql: {
       client: {
@@ -53,7 +53,7 @@ module.exports = appInfo => {
         // 用户名
         user: 'root',
         // 密码
-        password: 'abc123_',
+        password: '',
         // 数据库名
         database: 'attendance',
       },
