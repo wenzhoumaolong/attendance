@@ -6,14 +6,14 @@ module.exports = {
   },
   // task 是真正定时任务执行时被运行的函数，第一个参数是一个匿名的 Context 实例
   * task(ctx) {
-    // const { wechatAppId, wechatAppsecret } = ctx.app.config;
-    // const res = yield ctx.curl(
-    //   `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${wechatAppId}&secret=${wechatAppsecret}`,
-    //   {
-    //     dataType: 'json',
-    //   });
-    // console.log('get wechat access token done');
-    // console.log(res.data);
-    // ctx.app.weChatCache = res.data;
+    const { wechatAppId, wechatAppsecret } = ctx.app.config;
+    const res = yield ctx.curl(
+      `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${wechatAppId}&secret=${wechatAppsecret}`,
+      {
+        dataType: 'json',
+      });
+    console.log('get wechat access token done');
+    console.log(res.data);
+    ctx.app.weChatCache = res.data;
   },
 };
