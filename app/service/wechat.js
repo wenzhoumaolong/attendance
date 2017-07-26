@@ -1,42 +1,68 @@
+const { SYSTEM_ERROR } = require('../error');
+var moment = require('moment');
+
 module.exports = app => {
 	return class WechatService extends app.Service {
-		* sendTemplate() {
+		* sendTemplate(employee, status) {
 			const { access_token } = app.weChatCache;
+      const statueStr = status == 'IN' ? '进' : '出';
 
-			const data =  {
-      	"touser":"oFX9X0R8Cv0EMDKMPQ-XKZSeQFtE",
-       	"template_id":"VXRHGaGIQXI6345Jg_cau7cDwBp6Hp-P97iWqJzXia4",        
-       	"data":{
-         	"first": {
-            "value":"恭喜你购买成功！",
+      employee.map(item => {
+        this.send(item.openId, employee);
+      })
+		}
+
+    * send(openId, employee) {
+      var bindUser = '';
+      var remark = '';
+      employee.map((item) => {
+        if (item.openId != openId) {
+          bindUser = bindUser + item.nickname + '，';
+        }
+      });
+      if (bindUser.length > 0) {
+        bindUser = bindUser.substring(0, bindUser.length - 1);
+        remark = `提示：收到该信息的还有${bindUser}。`
+      }
+
+      const data =  {
+        "touser":"oFX9X0R8Cv0EMDKMPQ-XKZSeQFtE",
+        "template_id": openId,        
+        "data":{
+          "first": {
+            "value":`您好，${employee.name}已${statueStr}学校`,
             "color":"#173177"
-         	},
-         	"keynote1":{
-            "value":"巧克力",
+          },
+          "childName":{
+            "value": employee.name,
             "color":"#173177"
-         	},
-         	"keynote2": {
-            "value":"39.8元",
+          },
+          "time": {
+            "value":moment().format('YYYY-MM-DD'),
             "color":"#173177"
-         	},
-         	"keynote3": {
-            "value":"2014年9月22日",
+          },
+          "status": {
+            "value":`${statueStr}学校`,
             "color":"#173177"
-         	},
-         	"remark":{
-           	"value":"欢迎再次购买！",
-           	"color":"#173177"
-         	}
-       	}
+          },
+          "remark":{
+            "value": remark,
+            "color":"#173177"
+          }
+        }
       }
       const url = `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${access_token}`;
       const result = yield app.curl(url, {
-		    method: 'POST',
-		    contentType: 'json',
-		    data,
-		    dataType: 'json',
-		  });
-		  return result.data;
-		}
+        method: 'POST',
+        contentType: 'json',
+        data,
+        dataType: 'json',
+      });
+    }
+
+    * bind(wechat) {
+      const result = yield app.mysql.insert('wechat_information', wechat);
+      return { success: result.affectedRows === 1, error: SYSTEM_ERROR };
+    }
 	}
 }

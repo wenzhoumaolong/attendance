@@ -60,15 +60,15 @@ CREATE TABLE `employee` (
     `updateDate` DATETIME NOT NULL DEFAULT NOW()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `observer_relation` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `observerId` INT NOT NULL,
-    `observedId` INT NOT NULL
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `wechat_information` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `openId` VARCHAR(50),
+    `nickname` VARCHAR(50),
+    `sex` VARCHAR(10),
+    `province` VARCHAR(50),
+    `city` VARCHAR(50),
+    `country` VARCHAR(50),
+    `headimgurl` VARCHAR(50),
     `employeeId` INT NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -95,6 +95,4 @@ CREATE TABLE `rfid` (
 -- ALTER TABLE `employee` ADD CONSTRAINT `employee_roleId` FOREIGN KEY (`roleId`) REFERENCES employee_role(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE `attendance_record` ADD CONSTRAINT `attendance_record_employeeId` FOREIGN KEY (`employeeId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE `wechat_information` ADD CONSTRAINT `wechat_information` FOREIGN KEY (`employeeId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
-ALTER TABLE `observer_relation` ADD CONSTRAINT `observer_relation_observerId` FOREIGN KEY (`observerId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
-ALTER TABLE `observer_relation` ADD CONSTRAINT `observer_relation_observedId` FOREIGN KEY (`observedId`) REFERENCES wechat_information(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE `attendance`.`employee` ADD UNIQUE INDEX `phone_UNIQUE` (`phone` ASC);

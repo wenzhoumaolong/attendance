@@ -1,4 +1,3 @@
-const oauth = require('../utils/wechat_oauth_util');
 const Transfer = require('../model/response');
 const { WECHAT_GETINFO_ERROR } = require('../error');
 
@@ -36,7 +35,10 @@ module.exports = app  => {
 		}
 
 		* bind() {
-
+			const { service, request } = this.ctx;
+			const result = yield service.wechat.bind(request.body);
+			this.ctx.body = new Transfer();
+			return;
 		}
 
 		* sendTemplate() {
