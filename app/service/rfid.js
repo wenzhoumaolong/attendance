@@ -26,7 +26,7 @@ module.exports = app => {
 						employeeId: employee.id,
 						recordType: status
 					});
-				this.service.wechat.sendTemplate(employee, status);
+				yield this.service.wechat.sendTemplate(employee, status);
 				return { success: result.affectedRows === 1, error: SYSTEM_ERROR };
 			}
 

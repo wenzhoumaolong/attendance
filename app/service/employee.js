@@ -16,7 +16,7 @@ module.exports = app => {
 		}
 
 		* queryEmployees(name, gradeId, classId, phone, page, pageSize) {
-			var queryStr = 'SELECT name, phone, gradeId, classId FROM `employee` ' +
+			var queryStr = 'SELECT employee.id, name, phone, gradeId, classId FROM `employee` ' +
 												` WHERE name LIKE '%${name}%'`;
 
 			var countStr = 'SELECT COUNT(id) AS totalCount FROM `employee` ' +
@@ -37,7 +37,6 @@ module.exports = app => {
 			}
 
 			queryStr += ` LIMIT ${(page - 1) * pageSize}, ${pageSize} `;
-			console.log(queryStr);
 
 			const employees = yield app.mysql.query(queryStr);
 			const result = yield app.mysql.query(countStr);
@@ -75,6 +74,8 @@ module.exports = app => {
 
 		* create(employee) {
 			const result = yield app.mysql.insert('employee', employee);
+			const oauthUrl = yield this.service.wechatoauth.getAuthorizeUrl(result.insertId);
+			this.ctx.helper.generateQRImage(employee.phone, oauthUrl);
 			return result.insertId;
 		}
 

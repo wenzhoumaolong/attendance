@@ -62,13 +62,13 @@ CREATE TABLE `employee` (
 
 CREATE TABLE `wechat_information` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `openId` VARCHAR(50),
+    `openid` VARCHAR(50),
     `nickname` VARCHAR(50),
     `sex` VARCHAR(10),
     `province` VARCHAR(50),
     `city` VARCHAR(50),
     `country` VARCHAR(50),
-    `headimgurl` VARCHAR(50),
+    `headimgurl` VARCHAR(200),
     `employeeId` INT NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

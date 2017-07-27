@@ -4,18 +4,19 @@ var moment = require('moment');
 module.exports = app => {
 	return class WechatService extends app.Service {
 		* sendTemplate(employee, status) {
-			const { access_token } = app.weChatCache;
-      const statueStr = status == 'IN' ? '进' : '出';
+      const observer = yield app.mysql.select('wechat_information', { employeeId: employee.id });
 
-      employee.map(item => {
-        this.send(item.openId, employee);
-      })
+      for (var i = 0; i < observer.length; i++) {
+        yield this.send(observer[i].openid, employee, observer, status);
+      }
 		}
 
-    * send(openId, employee) {
+    * send(openId, employee, observer, status) {
       var bindUser = '';
       var remark = '';
-      employee.map((item) => {
+      const { access_token } = app.weChatCache;
+      const statueStr = status == 'IN' ? '进' : '出';
+      observer.map((item) => {
         if (item.openId != openId) {
           bindUser = bindUser + item.nickname + '，';
         }
@@ -26,8 +27,8 @@ module.exports = app => {
       }
 
       const data =  {
-        "touser":"oFX9X0R8Cv0EMDKMPQ-XKZSeQFtE",
-        "template_id": openId,        
+        "touser": openId,
+        "template_id": 'VXRHGaGIQXI6345Jg_cau7cDwBp6Hp-P97iWqJzXia4',        
         "data":{
           "first": {
             "value":`您好，${employee.name}已${statueStr}学校`,
@@ -61,7 +62,9 @@ module.exports = app => {
     }
 
     * bind(wechat) {
-      const result = yield app.mysql.insert('wechat_information', wechat);
+      const { id, openid, nickname, sex, province, city, country, headimgurl, employeeId } = wechat;
+      const result = yield app.mysql.insert('wechat_information', 
+        { id, openid, nickname, sex, province, city, country, headimgurl, employeeId });
       return { success: result.affectedRows === 1, error: SYSTEM_ERROR };
     }
 	}
