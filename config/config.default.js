@@ -13,6 +13,13 @@ module.exports = appInfo => {
       domainWhiteList: ['http://localhost:9000', ''],
     },
 
+    bodyParser: {
+        enableTypes:['json','form','text'],
+        extendTypes: {
+        text: ['text/xml'] 
+      }
+    },
+
     keys: appInfo.name + '1495344987775',
 
     static: {
