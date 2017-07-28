@@ -1,4 +1,5 @@
 const Transfer = require('../model/response');
+const { DELETE_FAILED } = require('../error');
 
 module.exports = app => {
 	return class EmployeeService extends app.Service {
@@ -75,13 +76,29 @@ module.exports = app => {
 		* create(employee) {
 			const result = yield app.mysql.insert('employee', employee);
 			const oauthUrl = yield this.service.wechatoauth.getAuthorizeUrl(result.insertId);
-			this.ctx.helper.generateQRImage(employee.phone, oauthUrl);
+			this.ctx.helper.generateQRImage(result.insertId, oauthUrl);
 			return result.insertId;
 		}
 
 		* update(employee) {
 			const result = yield app.mysql.update('employee', employee);
 			return result.affectedRows === 1;
+		}
+
+		* delete(id) {
+			const conn = yield app.mysql.beginTransaction();
+			try {
+				yield conn.delete('attendance_record', { employeeId: id });
+				yield conn.delete('wechat_information', { employeeId: id });
+				yield conn.delete('employee', { id });
+			  yield conn.commit();
+			} catch (err) {
+			  // error, rollback
+			  yield conn.rollback();
+			  return { success: false, error: DELETE_FAILED };
+			}
+			this.ctx.helper.deleteQRImage(id);
+			return { success: true };
 		}
 	}
 }

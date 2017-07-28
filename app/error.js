@@ -54,5 +54,9 @@ module.exports = {
   WECHAT_GETINFO_ERROR: {
     code: 9014,
     message: '获取信息失败，请稍后再试'
+  },
+  DELETE_FAILED: {
+    code: 9015,
+    message: '删除失败，请稍后再试'
   }
 }

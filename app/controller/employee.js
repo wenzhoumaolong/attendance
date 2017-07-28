@@ -66,11 +66,20 @@ module.exports = app  => {
 			const { name, phone, gradeId, classId, rfid } = ctx.request.body;
 			yield ctx.service.employee.update({ id: ctx.params.id, name, phone, gradeId, classId, RFID: rfid });
 			this.ctx.body = new Transfer();
+			return;
 		}
 
 		// --Path /employee/:id Method --DELETE
 		* destroy() {
-
+			const { ctx, service } = this;
+			const result = yield service.employee.delete(ctx.params.id);
+			if (result.success) {
+				this.ctx.body = new Transfer();
+				return;
+			} else {
+				this.ctx.body = new Transfer(result.error);
+				return;
+			}
 		}
 	}
 }
