@@ -27,6 +27,7 @@ module.exports = app  => {
 				// }
 			}
 			this.ctx.body = new Transfer(INVALID_ACCOUNT_OR_PASSWORD);
+			return;
 		}
 
 		* logout() {
