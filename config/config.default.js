@@ -27,6 +27,8 @@ module.exports = appInfo => {
       dir: path.join(appInfo.baseDir, 'dist/'),
     },
 
+    secret: '123',
+
     view: {
       mapping: {
         '.pug': 'pug'

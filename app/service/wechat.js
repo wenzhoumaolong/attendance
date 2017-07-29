@@ -1,5 +1,5 @@
 const { SYSTEM_ERROR } = require('../error');
-var moment = require('moment');
+const moment = require('moment');
 
 module.exports = app => {
 	return class WechatService extends app.Service {
