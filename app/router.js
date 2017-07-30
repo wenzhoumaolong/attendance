@@ -5,6 +5,7 @@ module.exports = app => {
     app.get('setting', '/api/settings/grade', app.controller.settings.getGrade);
     app.get('setting', '/api/settings/class', app.controller.settings.getClasses);
   	app.post('login', '/api/login', app.controller.login.login);
+    app.post('changePassword', '/api/change-password', app.controller.login.changePassword);
   	app.get('logout', '/api/logout', app.controller.login.logout);
     app.get('wechat', '/api/wechat', app.controller.wechat.get);
     app.post('record', '/api/record', app.controller.record.queryRecords);
@@ -24,6 +25,7 @@ module.exports = app => {
     app.get('setting', '/api/settings/grade', app.controller.settings.getGrade);
     app.get('setting', '/api/settings/class', app.controller.settings.getClasses);
   	app.post('login', '/api/login', app.controller.login.login);
+    app.post('changePassword', '/api/change-password', app.controller.login.changePassword);
   	app.get('logout', '/api/logout', app.controller.login.logout);
     app.post('record', '/api/record', app.controller.record.queryRecords);
     app.get('permission', '/api/permission', app.controller.permission.get);

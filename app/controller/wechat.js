@@ -47,5 +47,24 @@ module.exports = app  => {
 			this.ctx.body = 'success';
 			return;
 		}
+
+		* post() {
+			const { service, request } = this.ctx;
+			var builder = new xml2js.Builder();  // JSON->xml
+  		var parser = new xml2js.Parser();   //xml -> json
+  		var jsonObj =  parser.parseString(request.body);
+			const responseData = {
+				xml:{
+					ToUserName: jsonObj.xml.FromUserName,
+					FromUserName: jsonObj.xml.ToUserName,
+					CreateTime:jsonObj.xml.CreateTime,
+					MsgType: 'text',
+					Content: '1111111',
+					MsgId: jsonObj.xml.MsgId
+				}
+			}
+			this.ctx.body = builder.buildObject(responseData);
+			return;
+		}
 	}
 }

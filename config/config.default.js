@@ -62,7 +62,7 @@ module.exports = appInfo => {
         // 用户名
         user: 'root',
         // 密码
-        password: '',
+        password: 'abc123_',
         // 数据库名
         database: 'attendance',
       },
@@ -72,14 +72,14 @@ module.exports = appInfo => {
       agent: false,
     },
     // middleware: [ 'errorHandler', 'sessionValidation', 'permissionCheck' ],
-    middleware: [ 'errorHandler' ],
+    middleware: [ 'errorHandler', 'sessionValidation' ],
     errorHandler: {
       // 非 `/api/` 路径不在这里做错误处理，留给默认的 onerror 插件统一处理
       match: '/api',
     },
-    // sessionValidation: {
-    //   ignore: '/api/login',
-    // },
+    sessionValidation: {
+      ignore: '/api/login',
+    },
     // permissionCheck: {
     //   // 非 `/api/` 路径不在这里做错误处理，留给默认的 onerror 插件统一处理
     //   match: '/api',

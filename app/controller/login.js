@@ -1,7 +1,7 @@
 const { permissions } = require('../const');
 const Transfer = require('../model/response');
 const moment = require('moment');
-const { INVALID_ACCOUNT_OR_PASSWORD, NO_PERMISSION } = require('../error');
+const { INVALID_ACCOUNT_OR_PASSWORD, NO_PERMISSION, INVALID_OLD_PASSWORD } = require('../error');
 
 module.exports = app  => {
 	return class LoginController extends app.Controller {
@@ -36,6 +36,21 @@ module.exports = app  => {
 		* logout() {
 			this.ctx.session.userId = null;
 			this.ctx.body = { success: true };
+		}
+
+		* changePassword() {
+			const { service, request } = this.ctx;
+			const { oldPassword, newPassword } = request.body;
+			const username = request.header.token;
+			const admin = yield service.admin.checkAccount(username, oldPassword);
+			if (!admin) {
+				this.ctx.body = new Transfer(INVALID_OLD_PASSWORD);
+				return;
+			}
+			admin.password = newPassword;
+			yield service.admin.changePassword(admin);
+			this.ctx.body = new Transfer();
+			return;
 		}
 	}
 }

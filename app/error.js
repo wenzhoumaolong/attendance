@@ -58,5 +58,9 @@ module.exports = {
   DELETE_FAILED: {
     code: 9015,
     message: '删除失败，请稍后再试'
+  },
+  INVALID_OLD_PASSWORD: {
+    code: 9016,
+    message: '旧密码错误'
   }
 }
