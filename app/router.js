@@ -18,9 +18,13 @@ module.exports = app => {
     app.get('wechat', '/api/wechat/bind', app.controller.wechat.bind);
     app.get('wechat', '/api/wechat/get-oauth', app.controller.wechat.getOauthPage);
     app.get('wechat', '/api/wechat/send-template', app.controller.wechat.sendTemplate);
-    app.get('*', app.controller.render.index);
+    app.post('structure', '/api/structure/add-grade', app.controller.structure.addGrade);
+    app.post('structure', '/api/structure/del-grade', app.controller.structure.delGrade);
+    app.post('structure', '/api/structure/add-class', app.controller.structure.addClass);
+    app.post('structure', '/api/structure/del-class', app.controller.structure.delClass);
+    app.post('*', app.controller.render.index);
   } else {
-	app.post('rfid', '/api/rfid', app.controller.rfid.create);
+	  app.post('rfid', '/api/rfid', app.controller.rfid.create);
     app.get('rfid', '/api/rfid', app.controller.rfid.get);
     app.get('setting', '/api/settings/grade', app.controller.settings.getGrade);
     app.get('setting', '/api/settings/class', app.controller.settings.getClasses);
@@ -38,6 +42,10 @@ module.exports = app => {
     app.get('wechat', '/api/wechat/bind', app.controller.wechat.bind);
     app.get('wechat', '/api/wechat/get-oauth', app.controller.wechat.getOauthPage);
     app.get('wechat', '/api/wechat/send-template', app.controller.wechat.sendTemplate);
+    app.post('structure', '/api/structure/add-grade', app.controller.structure.addGrade);
+    app.post('structure', '/api/structure/del-grade', app.controller.structure.delGrade);
+    app.post('structure', '/api/structure/add-class', app.controller.structure.addClass);
+    app.post('structure', '/api/structure/del-class', app.controller.structure.delClass);
     app.get('*', app.controller.render.index);
   }
 }
