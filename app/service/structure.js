@@ -22,6 +22,7 @@ module.exports = app => {
 				}
 				yield conn.delete('class', { gradeId: id });
 				yield conn.delete('grade', { id });
+				yield conn.commit();
 			} catch (err) {
 			  // error, rollback
 			  yield conn.rollback();
