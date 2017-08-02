@@ -13,8 +13,12 @@ module.exports = app => {
 		* delGrade() {
 			const { service, request } = this.ctx;
 			const { id } = request.body;
-			yield service.structure.delGrade(id);
-			this.ctx.body = new Transfer();
+			const result = yield service.structure.delGrade(id);
+			if (result.success) {
+				this.ctx.body = new Transfer();
+			} else {
+				this.ctx.body = new Transfer(result.error);
+			}
 			return;
 		}
 
@@ -29,8 +33,12 @@ module.exports = app => {
 		* delClass() {
 			const { service, request } = this.ctx;
 			const { id } = request.body;
-			yield service.structure.delClass(id);
-			this.ctx.body = new Transfer();
+			const result = yield service.structure.delClass(id);
+			if (result.success) {
+				this.ctx.body = new Transfer();
+			} else {
+				this.ctx.body = new Transfer(result.error);
+			}
 			return;
 		}
 	}

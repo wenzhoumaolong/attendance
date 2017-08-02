@@ -95,6 +95,9 @@ CREATE TABLE `rfid` (
 -- ALTER TABLE `role_permission_mapping` ADD CONSTRAINT `role_permission_mapping_permissionId` FOREIGN KEY (`permissionId`) REFERENCES permission(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 -- ALTER TABLE `employee` ADD CONSTRAINT `employee_warehouseId` FOREIGN KEY (`warehouseId`) REFERENCES warehouse(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 -- ALTER TABLE `employee` ADD CONSTRAINT `employee_roleId` FOREIGN KEY (`roleId`) REFERENCES employee_role(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE `class` ADD CONSTRAINT `class_gradeId` FOREIGN KEY (`gradeId`) REFERENCES grade(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE `employee` ADD CONSTRAINT `employee_gradeId` FOREIGN KEY (`gradeId`) REFERENCES grade(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE `employee` ADD CONSTRAINT `employee_classId` FOREIGN KEY (`classId`) REFERENCES class(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE `attendance_record` ADD CONSTRAINT `attendance_record_employeeId` FOREIGN KEY (`employeeId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE `wechat_information` ADD CONSTRAINT `wechat_information` FOREIGN KEY (`employeeId`) REFERENCES employee(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ALTER TABLE `attendance`.`employee` ADD UNIQUE INDEX `phone_UNIQUE` (`phone` ASC);
