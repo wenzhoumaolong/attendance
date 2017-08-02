@@ -52,6 +52,12 @@ module.exports = appInfo => {
     webchatJSDomain: '',
     wechatAppId: '',
     wechatAppsecret: '',
+    alSMSAppKey: '',
+    alSMSappsecret: '',
+    alSMSREST_URL: '',
+    alSMSSignName: '',
+    alSMSTemplateCodeIn: '',
+    alSMSTemplateCodeOut: '',
 
     mysql: {
       client: {
@@ -78,7 +84,7 @@ module.exports = appInfo => {
       match: '/api',
     },
     sessionValidation: {
-      ignore: '/api/login',
+      ignore: ['/api/login', '/api/rfid']
     },
     // permissionCheck: {
     //   // 非 `/api/` 路径不在这里做错误处理，留给默认的 onerror 插件统一处理
