@@ -56,6 +56,8 @@ CREATE TABLE `employee` (
     `gradeId` INT NOT NULL,
     `classId` INT NOT NULL,
     `RFID` VARCHAR(50),
+    `observedPhone` VARCHAR(50),
+    `isObserved` INT,
     `createDate` DATETIME NOT NULL DEFAULT NOW(),
     `updateDate` DATETIME NOT NULL DEFAULT NOW()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

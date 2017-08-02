@@ -4,6 +4,8 @@ const { EXIST_RFID,
 	INVALID_RFID_STATUS,
 	NOT_EXIST_RFID_EMPLOYEE,
 	NOT_EXIST_RFID } = require('../error');
+// TopClient = require('../sdk/alibabasms/topClient').TopClient;
+const moment = require('moment');
 
 module.exports = app => {
 	return class AdminService extends app.Service {
@@ -27,6 +29,29 @@ module.exports = app => {
 						recordType: status
 					});
 				yield this.service.wechat.sendTemplate(employee, status);
+				if (employee.isObserved == 1) {
+					const { alSMSAppKey, alSMSappsecret, alSMSREST_URL,
+						alSMSSignName, alSMSTemplateCodeIn, alSMSTemplateCodeOut } = app.config;
+					var client = new TopClient({
+                            'appkey': alSMSAppKey,
+                            'appsecret': alSMSappsecret,
+                            'REST_URL': alSMSREST_URL});
+
+					client.execute('alibaba.aliqin.fc.sms.num.send',
+              {
+              	'extend': '',
+              	'sms_type': 'normal',
+              	'sms_template_code': status == 'OUT' ? alSMSTemplateCodeOut : alSMSTemplateCodeIn,
+              	'sms_param': {
+              		'name': employee.name,
+              	},
+              	'sms_free_sign_name': alSMSSignName,
+              	'rec_num': employee.observedPhone,
+              	'format': 'json'
+              },
+              function (error,response) {
+              })
+				}
 				return { success: result.affectedRows === 1, error: SYSTEM_ERROR };
 			}
 

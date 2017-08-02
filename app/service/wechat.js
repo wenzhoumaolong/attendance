@@ -39,7 +39,7 @@ module.exports = app => {
             "color":"#173177"
           },
           "time": {
-            "value":moment().format('YYYY-MM-DD'),
+            "value":moment().format('YYYY-MM-DD HH:mm'),
             "color":"#173177"
           },
           "status": {

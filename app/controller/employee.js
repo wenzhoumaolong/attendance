@@ -49,8 +49,8 @@ module.exports = app  => {
 				this.ctx.body = new Transfer(EXIST_PHONE);
 				return;
 			}
-			const { name, phone, gradeId, classId, rfid } = ctx.request.body;
-			const id = yield ctx.service.employee.create({ name, phone, gradeId, classId, RFID: rfid });
+			const { name, phone, gradeId, classId, rfid, observedPhone, isObserved } = ctx.request.body;
+			const id = yield ctx.service.employee.create({ name, phone, gradeId, classId, RFID: rfid, observedPhone, isObserved });
 			this.ctx.body = new Transfer(200, { id });
 		}
 
@@ -63,8 +63,8 @@ module.exports = app  => {
 				this.ctx.body = new Transfer(EXIST_PHONE);
 				return;
 			}
-			const { name, phone, gradeId, classId, rfid } = ctx.request.body;
-			yield ctx.service.employee.update({ id: ctx.params.id, name, phone, gradeId, classId, RFID: rfid });
+			const { name, phone, gradeId, classId, rfid, observedPhone, isObserved } = ctx.request.body;
+			yield ctx.service.employee.update({ id: ctx.params.id, name, phone, gradeId, classId, RFID: rfid, observedPhone, isObserved });
 			this.ctx.body = new Transfer();
 			return;
 		}

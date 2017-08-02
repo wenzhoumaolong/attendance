@@ -9,10 +9,10 @@ module.exports = app => {
 				    						"classId, " +
 				    						"gradeId " +
 												"FROM `attendance_record` record " +
-												"INNER JOIN `employee` ON record.id = employee.id ";
+												"LEFT JOIN `employee` ON record.employeeId = employee.id ";
 			var countStr = "SELECT count(record.id) AS totalCount " +
 												"FROM `attendance_record` record " +
-												"INNER JOIN `employee` ON record.id = employee.id ";
+												"LEFT JOIN `employee` ON record.employeeId = employee.id ";
 			if (startDate) {
 				queryStr += ` AND record.createDate > '${startDate}' `;
 				countStr += ` AND record.createDate > '${startDate}' `;
