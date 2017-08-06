@@ -4,8 +4,8 @@ const { INVALID_IDENTITY } = require('../error');
 module.exports = app  => {
 	return class RfidController extends app.Controller {
 		* create() {
-			const { request, service } = this.ctx;
-			const { identity, status } = request.body;
+			const { service, query } = this.ctx;
+			const { identity, status } = query;
 
 			if (!identity) {
 				this.ctx.body = new Transfer(INVALID_IDENTITY);

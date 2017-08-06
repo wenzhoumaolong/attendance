@@ -1,6 +1,6 @@
 module.exports = app => {
   if (app.config.env !== 'prod') {
-    app.post('rfid', '/api/rfid', app.controller.rfid.create);
+    app.get('rfid', '/api/rfid/submit', app.controller.rfid.create);
     app.get('rfid', '/api/rfid', app.controller.rfid.get);
     app.get('setting', '/api/settings/grade', app.controller.settings.getGrade);
     app.get('setting', '/api/settings/class', app.controller.settings.getClasses);
@@ -24,7 +24,7 @@ module.exports = app => {
     app.post('structure', '/api/structure/del-class', app.controller.structure.delClass);
     app.post('*', app.controller.render.index);
   } else {
-	  app.post('rfid', '/api/rfid', app.controller.rfid.create);
+	  app.get('rfid', '/api/rfid/submit', app.controller.rfid.create);
     app.get('rfid', '/api/rfid', app.controller.rfid.get);
     app.get('setting', '/api/settings/grade', app.controller.settings.getGrade);
     app.get('setting', '/api/settings/class', app.controller.settings.getClasses);
