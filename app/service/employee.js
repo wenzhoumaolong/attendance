@@ -69,7 +69,7 @@ module.exports = app => {
 
 		* findById(id) {
 			const employee = yield app.mysql.get('employee', { id });
-			const observer = yield app.mysql.get('wechat_information', { employeeId: id });
+			const observer = yield app.mysql.select('wechat_information', { employeeId: id });
 			return Object.assign({}, employee, { observer: observer ? observer : [] });
 		}
 
