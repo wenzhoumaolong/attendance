@@ -15,7 +15,7 @@ module.exports = app => {
     app.post('filterWarehouse', '/api/warehouse/filter', app.controller.warehouse.filter);
     app.post('queryemployee', '/api/employee/query', app.controller.employee.queryEmployees);
     app.get('wechat', '/api/wechat/oauth', app.controller.wechat.getOauthInfo);
-    app.get('wechat', '/api/wechat/bind', app.controller.wechat.bind);
+    app.post('wechat', '/api/wechat/bind', app.controller.wechat.bind);
     app.get('wechat', '/api/wechat/get-oauth', app.controller.wechat.getOauthPage);
     app.get('wechat', '/api/wechat/send-template', app.controller.wechat.sendTemplate);
     app.post('structure', '/api/structure/add-grade', app.controller.structure.addGrade);
@@ -39,7 +39,7 @@ module.exports = app => {
     app.post('queryemployee', '/api/employee/query', app.controller.employee.queryEmployees);
     app.get('wechat', '/api/wechat', app.controller.wechat.get);
     app.get('wechat', '/api/wechat/oauth', app.controller.wechat.getOauthInfo);
-    app.get('wechat', '/api/wechat/bind', app.controller.wechat.bind);
+    app.post('wechat', '/api/wechat/bind', app.controller.wechat.bind);
     app.get('wechat', '/api/wechat/get-oauth', app.controller.wechat.getOauthPage);
     app.get('wechat', '/api/wechat/send-template', app.controller.wechat.sendTemplate);
     app.post('structure', '/api/structure/add-grade', app.controller.structure.addGrade);
