@@ -4,7 +4,10 @@ const moment = require('moment');
 module.exports = app => {
 	return class WechatService extends app.Service {
 		* sendTemplate(employee, status) {
-      const observer = yield app.mysql.select('wechat_information', { employeeId: employee.id });
+      const observer = yield app.mysql.select('wechat_information', 
+        {
+          where: { employeeId: employee.id }
+        });
 
       for (var i = 0; i < observer.length; i++) {
         yield this.send(observer[i].openid, employee, observer, status);
@@ -63,7 +66,10 @@ module.exports = app => {
 
     * bind(wechat) {
       const { id, openid, nickname, sex, province, city, country, headimgurl, employeeId } = wechat;
-      const observer = yield app.mysql.get('wechat_information', { employeeId: id });
+      const observer = yield app.mysql.select('wechat_information', 
+        {
+          where: { employeeId: id }
+        });
       if (observer.length >= 3) {
         return { success: false, error: MAX_OBSERVER };
       }
