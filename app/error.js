@@ -62,5 +62,9 @@ module.exports = {
   INVALID_OLD_PASSWORD: {
     code: 9016,
     message: '旧密码错误'
+  },
+  MAX_OBSERVER: {
+    code: 9017,
+    message: '订阅人数量已经达到最大值，不能订阅'
   }
 }

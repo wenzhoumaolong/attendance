@@ -37,8 +37,13 @@ module.exports = app  => {
 		* bind() {
 			const { service, request } = this.ctx;
 			const result = yield service.wechat.bind(request.body);
-			this.ctx.body = new Transfer();
-			return;
+			if (result.success) {
+				this.ctx.body = new Transfer();
+				return;
+			} else {
+				this.ctx.body = new Transfer(result.error);
+				return;
+			}
 		}
 
 		* sendTemplate() {

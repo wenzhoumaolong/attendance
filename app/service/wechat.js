@@ -1,4 +1,4 @@
-const { SYSTEM_ERROR } = require('../error');
+const { SYSTEM_ERROR, MAX_OBSERVER } = require('../error');
 const moment = require('moment');
 
 module.exports = app => {
@@ -63,6 +63,10 @@ module.exports = app => {
 
     * bind(wechat) {
       const { id, openid, nickname, sex, province, city, country, headimgurl, employeeId } = wechat;
+      const observer = yield app.mysql.get('wechat_information', { employeeId: id });
+      if (observer.length >= 3) {
+        return { success: false, error: MAX_OBSERVER };
+      }
       const result = yield app.mysql.insert('wechat_information', 
         { id, openid, nickname, sex, province, city, country, headimgurl, employeeId });
       return { success: result.affectedRows === 1, error: SYSTEM_ERROR };
