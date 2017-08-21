@@ -62,7 +62,8 @@ module.exports = app => {
         data,
         dataType: 'json',
       });
-      app.logger.info(result);
+      console.log(222222222);
+      console.log(result);
     }
 
     * bind(wechat) {

@@ -12,7 +12,9 @@ module.exports = app  => {
 				return;
 			}
 			var i = identity.toLowerCase();
-			this.ctx.logger.info(i);
+			console.log('111111111111');
+			console.log(i);
+			console.log(status);
 			const result = yield service.rfid.saveIdentity(i, status);
 			if (result.success == true) {
 				this.ctx.body = new Transfer();
