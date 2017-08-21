@@ -63,7 +63,9 @@ module.exports = app => {
 
     * bind(wechat) {
       const { id, openid, nickname, sex, province, city, country, headimgurl, employeeId } = wechat;
-      const observer = yield app.mysql.get('wechat_information', { employeeId: id });
+      const observer = yield app.mysql.select('wechat_information', {
+        where: { employeeId: id }
+      });
       if (observer.length >= 3) {
         return { success: false, error: MAX_OBSERVER };
       }
