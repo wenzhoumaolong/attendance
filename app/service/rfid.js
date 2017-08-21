@@ -50,6 +50,8 @@ module.exports = app => {
               	'format': 'json'
               },
               function (error,response) {
+								console.log(error);
+								console.log(response);
               })
 				}
 				return { success: result.affectedRows === 1, error: SYSTEM_ERROR };

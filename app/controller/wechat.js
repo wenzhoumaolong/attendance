@@ -1,5 +1,6 @@
 const Transfer = require('../model/response');
 const { WECHAT_GETINFO_ERROR } = require('../error');
+const xml2js = require('xml2js');
 
 module.exports = app  => {
 	return class WechatController extends app.Controller {

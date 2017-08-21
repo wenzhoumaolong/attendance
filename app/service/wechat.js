@@ -1,10 +1,13 @@
-const { SYSTEM_ERROR, MAX_OBSERVER } = require('../error');
+﻿const { SYSTEM_ERROR, MAX_OBSERVER } = require('../error');
 const moment = require('moment');
 
 module.exports = app => {
 	return class WechatService extends app.Service {
 		* sendTemplate(employee, status) {
-      const observer = yield app.mysql.select('wechat_information', { employeeId: employee.id });
+      const observer = yield app.mysql.select('wechat_information', 
+        {
+          where: { employeeId: employee.id }
+        });
 
       for (var i = 0; i < observer.length; i++) {
         yield this.send(observer[i].openid, employee, observer, status);
@@ -28,7 +31,7 @@ module.exports = app => {
 
       const data =  {
         "touser": openId,
-        "template_id": 'VXRHGaGIQXI6345Jg_cau7cDwBp6Hp-P97iWqJzXia4',        
+        "template_id": 'dG6XALYLwWNPOYfr5TX0FvZqg0Cjf8V-3uasN6Vl24U',        
         "data":{
           "first": {
             "value":`您好，${employee.name}已${statueStr}学校`,
@@ -59,13 +62,15 @@ module.exports = app => {
         data,
         dataType: 'json',
       });
+      app.logger.info(result);
     }
 
     * bind(wechat) {
       const { id, openid, nickname, sex, province, city, country, headimgurl, employeeId } = wechat;
-      const observer = yield app.mysql.select('wechat_information', {
-        where: { employeeId: id }
-      });
+      const observer = yield app.mysql.select('wechat_information', 
+        {
+          where: { employeeId: id }
+        });
       if (observer.length >= 3) {
         return { success: false, error: MAX_OBSERVER };
       }
