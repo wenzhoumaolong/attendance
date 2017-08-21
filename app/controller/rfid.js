@@ -11,11 +11,14 @@ module.exports = app  => {
 				this.ctx.body = new Transfer(INVALID_IDENTITY);
 				return;
 			}
-			const result = yield service.rfid.saveIdentity(identity, status);
+var i = identity.toLowerCase();
+console.log(i);
+			const result = yield service.rfid.saveIdentity(i, status);
 			if (result.success == true) {
 				this.ctx.body = new Transfer();
 			} else {
 				this.ctx.body = new Transfer(result.error);
+console.log(result.error);
 			}
 			return;
 		}

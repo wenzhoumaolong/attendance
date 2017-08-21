@@ -1,4 +1,4 @@
-const { SYSTEM_ERROR, MAX_OBSERVER } = require('../error');
+﻿const { SYSTEM_ERROR, MAX_OBSERVER } = require('../error');
 const moment = require('moment');
 
 module.exports = app => {
@@ -31,7 +31,7 @@ module.exports = app => {
 
       const data =  {
         "touser": openId,
-        "template_id": 'VXRHGaGIQXI6345Jg_cau7cDwBp6Hp-P97iWqJzXia4',        
+        "template_id": 'dG6XALYLwWNPOYfr5TX0FvZqg0Cjf8V-3uasN6Vl24U',        
         "data":{
           "first": {
             "value":`您好，${employee.name}已${statueStr}学校`,
@@ -62,6 +62,7 @@ module.exports = app => {
         data,
         dataType: 'json',
       });
+console.log(result);
     }
 
     * bind(wechat) {

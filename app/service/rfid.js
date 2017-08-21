@@ -29,7 +29,9 @@ module.exports = app => {
 						recordType: status
 					});
 				yield this.service.wechat.sendTemplate(employee, status);
+console.log(22222);
 				if (employee.isObserved == 1) {
+console.log(22222);
 					const { alSMSAppKey, alSMSappsecret, alSMSREST_URL,
 						alSMSSignName, alSMSTemplateCodeIn, alSMSTemplateCodeOut } = app.config;
 					var client = new TopClient({
@@ -50,6 +52,8 @@ module.exports = app => {
               	'format': 'json'
               },
               function (error,response) {
+console.log(error);
+console.log(response);
               })
 				}
 				return { success: result.affectedRows === 1, error: SYSTEM_ERROR };

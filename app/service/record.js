@@ -1,4 +1,4 @@
-module.exports = app => {
+﻿module.exports = app => {
 	return class RecordService extends app.Service {
 		* getRecords(startDate, endDate, name, gradeId, classId, phone, page, pageSize) {
 			var queryStr = "SELECT employee.name, " +
@@ -38,7 +38,7 @@ module.exports = app => {
 				countStr += ` AND classId = ${classId} `;
 			}
 			
-			queryStr += ` ORDER BY record.id LIMIT ${(page - 1) * pageSize}, ${pageSize} `;
+			queryStr += ` ORDER BY record.id desc LIMIT ${(page - 1) * pageSize}, ${pageSize} `;
 			const records = yield app.mysql.query(queryStr);
 			const result = yield app.mysql.query(countStr);
 			
