@@ -66,5 +66,9 @@ module.exports = {
   MAX_OBSERVER: {
     code: 9017,
     message: '订阅人数量已经达到最大值，不能订阅'
+  },
+  HAS_SENT_MESSAGE_ERROR: {
+    code: 9018,
+    message: '已经发送过消息'
   }
 }

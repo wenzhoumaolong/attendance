@@ -5,17 +5,13 @@ module.exports = app  => {
 	return class RfidController extends app.Controller {
 		* create() {
 			const { service, query } = this.ctx;
-			const { identity, status } = query;
-
+			const { identity } = query;
 			if (!identity) {
 				this.ctx.body = new Transfer(INVALID_IDENTITY);
 				return;
 			}
-			var i = identity.toLowerCase();
-			console.log('111111111111');
-			console.log(i);
-			console.log(status);
-			const result = yield service.rfid.saveIdentity(i, status);
+			this.ctx.logger.info(identity);
+			const result = yield service.rfid.saveIdentity(identity.toLowerCase());
 			if (result.success == true) {
 				this.ctx.body = new Transfer();
 			} else {

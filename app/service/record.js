@@ -16,7 +16,7 @@
 			if (startDate) {
 				queryStr += ` AND record.createDate > '${startDate}' `;
 				countStr += ` AND record.createDate > '${startDate}' `;
-			} 
+			}
 			if (endDate) {
 				queryStr += ` AND record.createDate < '${endDate}' `;
 				countStr += ` AND record.createDate < '${endDate}' `;
@@ -37,12 +37,18 @@
 				queryStr += ` AND classId = ${classId} `;
 				countStr += ` AND classId = ${classId} `;
 			}
-			
+
 			queryStr += ` ORDER BY record.id desc LIMIT ${(page - 1) * pageSize}, ${pageSize} `;
 			const records = yield app.mysql.query(queryStr);
 			const result = yield app.mysql.query(countStr);
-			
+
 			return { list: records, totalCount: result[0].totalCount };
 		}
+
+		* hasSentMessage(employeeId, startDate, endDate) {
+		  const queryStr = 'SELECT id FROM `attendance_record` ' +  `WHERE createDate > '${startDate}' AND createDate < '${endDate}' AND employeeId = employeeId LIMIT 0, 1;`;
+      const result = yield app.mysql.query(queryStr);
+      return result && result.length >= 1;
+    }
 	}
 }
