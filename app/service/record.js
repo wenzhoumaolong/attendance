@@ -46,7 +46,7 @@
 		}
 
 		* hasSentMessage(employeeId, startDate, endDate) {
-		  const queryStr = 'SELECT id FROM `attendance_record` ' +  `WHERE createDate > '${startDate}' AND createDate < '${endDate}' AND employeeId = employeeId LIMIT 0, 1;`;
+		  const queryStr = 'SELECT id FROM `attendance_record` ' +  `WHERE createDate > '${startDate}' AND createDate < '${endDate}' AND employeeId = '${employeeId}' LIMIT 0, 1;`;
       const result = yield app.mysql.query(queryStr);
       return result && result.length >= 1;
     }
