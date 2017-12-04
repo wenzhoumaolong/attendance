@@ -9,10 +9,10 @@
 				    						"classId, " +
 				    						"gradeId " +
 												"FROM `attendance_record` record " +
-												"LEFT JOIN `employee` ON record.employeeId = employee.id ";
+												"INNER JOIN `employee` ON record.employeeId = employee.id ";
 			var countStr = "SELECT count(record.id) AS totalCount " +
 												"FROM `attendance_record` record " +
-												"LEFT JOIN `employee` ON record.employeeId = employee.id ";
+												"INNER JOIN `employee` ON record.employeeId = employee.id ";
 			if (startDate) {
 				queryStr += ` AND record.createDate > '${startDate}' `;
 				countStr += ` AND record.createDate > '${startDate}' `;

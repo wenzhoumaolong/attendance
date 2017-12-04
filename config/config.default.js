@@ -12,8 +12,7 @@ module.exports = appInfo => {
       },
       domainWhiteList: ['http://localhost:9000', ''],
     },
-
-    bodyParser: {
+bodyParser: {
         enableTypes:['json','form','text'],
         extendTypes: {
         text: ['text/xml'] 
@@ -21,13 +20,12 @@ module.exports = appInfo => {
     },
 
     keys: appInfo.name + '1495344987775',
+secret: '123',
 
     static: {
       prefix: '/',
       dir: path.join(appInfo.baseDir, 'dist/'),
     },
-
-    secret: '123',
 
     view: {
       mapping: {
@@ -49,15 +47,15 @@ module.exports = appInfo => {
       compileDebug: true
     },
     defaultPassword: '111111',
-    webchatJSDomain: '',
-    wechatAppId: '',
-    wechatAppsecret: '',
-    alSMSAppKey: '',
-    alSMSappsecret: '',
-    alSMSREST_URL: '',
-    alSMSSignName: '',
-    alSMSTemplateCodeIn: '',
-    alSMSTemplateCodeOut: '',
+    webchatJSDomain: 'http://wmaolong.cn/wzml',
+    wechatAppId: 'wx84ac462304bb229e',
+    wechatAppsecret: '64fef03efc3247143a4b404d753f236f',
+	alSMSAppKey: '24568404',
+    alSMSappsecret: '30526427fb08debb1a5943558483921b',
+    alSMSREST_URL: 'http://gw.api.taobao.com/router/rest',
+    alSMSSignName: '校园管理系统',
+    alSMSTemplateCodeIn: 'SMS_80485030',
+    alSMSTemplateCodeOut: 'SMS_80425027',
 
     mysql: {
       client: {
@@ -68,7 +66,7 @@ module.exports = appInfo => {
         // 用户名
         user: 'root',
         // 密码
-        password: 'abc123_',
+        password: 'root',
         // 数据库名
         database: 'attendance',
       },
@@ -77,14 +75,14 @@ module.exports = appInfo => {
       // 是否加载到 agent 上，默认关闭
       agent: false,
     },
-    // middleware: [ 'errorHandler', 'sessionValidation', 'permissionCheck' ],
-    middleware: [ 'errorHandler', 'sessionValidation' ],
+    middleware: [ 'errorHandler', 'sessionValidation'],
+
     errorHandler: {
       // 非 `/api/` 路径不在这里做错误处理，留给默认的 onerror 插件统一处理
       match: '/api',
     },
     sessionValidation: {
-      ignore: ['/api/login', '/api/rfid']
+	ignore: ['/api/login', '/api/rfid', '/api/wechat', '/api/employee']
     },
     // permissionCheck: {
     //   // 非 `/api/` 路径不在这里做错误处理，留给默认的 onerror 插件统一处理
